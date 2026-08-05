@@ -47,7 +47,7 @@ export default function LoginExperience() {
     setNotice("");
     window.setTimeout(() => {
       setLoading(false);
-      setNotice("You’re signed in. Welcome back to inSpace.");
+      setNotice("You’re signed in. Welcome back to YoruSpace.");
     }, 800);
   }
 
@@ -58,19 +58,19 @@ export default function LoginExperience() {
     >
       <a className="skip-link" href="#login-form">Skip to sign in</a>
       <section className="login-panel" aria-labelledby="welcome-title">
-        <a className="brand-mark" href="#login-form" aria-label="inSpace home"><span /></a>
+        <a className="brand-mark" href="#login-form" aria-label="YoruSpace home"><span /></a>
         <div className="login-content">
           <p className="welcome-kicker">Welcome to</p>
-          <h1 id="welcome-title">inSpace</h1>
+          <h1 id="welcome-title">YoruSpace</h1>
           <form id="login-form" onSubmit={submit}>
             <div className="field">
               <label htmlFor="email">Email</label>
-              <input id="email" name="email" type="email" autoComplete="email" defaultValue="bonjourguys@talk.com" required />
+              <input id="email" name="email" type="email" autoComplete="email" required />
             </div>
             <div className="field">
               <div className="label-row"><label htmlFor="password">Password</label><a href="#forgot">Forgot password?</a></div>
               <div className="password-field">
-                <input id="password" name="password" type={showPassword ? "text" : "password"} autoComplete="current-password" defaultValue="inspace" required />
+                <input id="password" name="password" type={showPassword ? "text" : "password"} autoComplete="current-password" required />
                 <button type="button" onClick={() => setShowPassword((value) => !value)} aria-label={showPassword ? "Hide password" : "Show password"}><EyeIcon open={showPassword} /></button>
               </div>
             </div>
@@ -84,7 +84,7 @@ export default function LoginExperience() {
 
       <section
         className="scene-panel"
-        aria-label="inSpace at night illustration"
+        aria-label="YoruSpace at night illustration"
       >
         <div className="scene-image" aria-hidden="true"><Image src={sceneAsset} alt="" fill priority sizes="(max-width: 900px) 100vw, 58vw" /></div>
         <div className="scene-tint" aria-hidden="true" />
