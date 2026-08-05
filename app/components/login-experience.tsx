@@ -1,98 +1,108 @@
 "use client";
 
-import { FormEvent, useState } from "react";
+import Image from "next/image";
+import { useState } from "react";
+import type { CSSProperties, SubmitEvent } from "react";
 
-type Accent = "violet" | "ocean" | "rose" | "forest" | "amber" | "sky";
+const sceneAsset = "https://images.pexels.com/photos/167699/pexels-photo-167699.jpeg?auto=compress&cs=tinysrgb&w=1600";
+
+type Gradient = "violet" | "sunset" | "ocean" | "lime";
 type Background = "aurora" | "paper" | "midnight";
 
-const accents: { name: Accent; label: string; color: string }[] = [
-  { name: "violet", label: "Violet", color: "#7456d9" },
-  { name: "ocean", label: "Ocean", color: "#177e9b" },
-  { name: "rose", label: "Rose", color: "#bd5478" },
-  { name: "forest", label: "Forest", color: "#377f5a" },
-  { name: "amber", label: "Amber", color: "#b8752d" },
-  { name: "sky", label: "Sky", color: "#3b83b3" },
-];
+const gradients: Record<Gradient, { label: string; start: string; end: string }> = {
+  violet: { label: "Violet dusk", start: "#5638df", end: "#c548d5" },
+  sunset: { label: "Sunset gold", start: "#f0518a", end: "#ffc85c" },
+  ocean: { label: "Ocean blue", start: "#096bdb", end: "#4ee1d2" },
+  lime: { label: "Electric lime", start: "#82bd32", end: "#24b9b2" },
+};
 
-function ThemeIcon({ dark }: { dark: boolean }) {
-  return dark ? (
-    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 14.2A8.5 8.5 0 0 1 9.8 3.5 8.5 8.5 0 1 0 20.5 14.2Z" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinejoin="round" /></svg>
+function EyeIcon({ open }: { open: boolean }) {
+  return open ? (
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2.5 12s3.4-5.5 9.5-5.5S21.5 12 21.5 12 18.1 17.5 12 17.5 2.5 12 2.5 12Z" /><circle cx="12" cy="12" r="2.5" /></svg>
   ) : (
-    <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3.5" fill="none" stroke="currentColor" strokeWidth="1.8" /><path d="M12 2.5v2M12 19.5v2M21.5 12h-2M4.5 12h-2M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4M18.7 18.7l-1.4-1.4M6.7 6.7 5.3 5.3" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" /></svg>
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3 3 18 18M10.6 6.7A10.3 10.3 0 0 1 12 6.5c6.1 0 9.5 5.5 9.5 5.5a17.2 17.2 0 0 1-3.1 3.5M6.2 6.3A17 17 0 0 0 2.5 12s3.4 5.5 9.5 5.5c1.1 0 2.1-.2 3-.5" /><path d="M9.9 9.9a3 3 0 0 0 4.2 4.2" /></svg>
   );
 }
 
+function ThemeIcon({ dark }: { dark: boolean }) {
+  return dark ? <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 15.2A8.6 8.6 0 0 1 8.8 4 8.6 8.6 0 1 0 20 15.2Z" /></svg> : <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3.5" /><path d="M12 2.5v2M12 19.5v2M21.5 12h-2M4.5 12h-2M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4M18.7 18.7l-1.4-1.4M6.7 6.7 5.3 5.3" /></svg>;
+}
+
 function DotLoader() {
-  return <span className="dot-loader" aria-label="Signing you in" role="status"><i /><i /><i /></span>;
+  return <span className="three-dot-loader" role="status" aria-label="Signing in"><i /><i /><i /></span>;
 }
 
 export default function LoginExperience() {
-  const [dark, setDark] = useState(false);
-  const [accent, setAccent] = useState<Accent>("violet");
+  const [gradient, setGradient] = useState<Gradient>("violet");
   const [background, setBackground] = useState<Background>("aurora");
-  const [compactNav, setCompactNav] = useState(false);
+  const [dark, setDark] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [notice, setNotice] = useState("");
+  const currentGradient = gradients[gradient];
 
-  const selectedAccent = accents.find((item) => item.name === accent)!;
-
-  function submit(event: FormEvent<HTMLFormElement>) {
+  function submit(event: SubmitEvent<HTMLFormElement>) {
     event.preventDefault();
     setLoading(true);
     setNotice("");
     window.setTimeout(() => {
       setLoading(false);
-      setNotice("You’re signed in. Welcome back to Yoru.");
-    }, 1100);
+      setNotice("You’re signed in. Welcome back to inSpace.");
+    }, 800);
   }
 
   return (
-    <div
-      className={`yoru-app ${dark ? "theme-dark" : "theme-light"} background-${background}`}
-      style={{ "--accent": selectedAccent.color } as React.CSSProperties}
+    <main
+      className={`login-page ${dark ? "theme-dark" : "theme-light"} background-${background}`}
+      style={{ "--accent": currentGradient.start, "--scene-start": currentGradient.start, "--scene-end": currentGradient.end } as CSSProperties}
     >
-      <a className="skip-link" href="#sign-in">Skip to sign in</a>
-      <header className={`site-header ${compactNav ? "nav-compact" : "nav-full"}`}>
-        <a className="brand" href="#sign-in" aria-label="Yoru home"><span>Y</span><b>yoru</b></a>
-        <div className="header-actions">
-          {!compactNav && <p className="header-note">A calmer way to work</p>}
-          <button className="icon-button" type="button" onClick={() => setDark(!dark)} aria-label={`Switch to ${dark ? "light" : "dark"} theme`}>
-            <ThemeIcon dark={dark} />
-          </button>
-          <button className="text-button" type="button" onClick={() => setCompactNav(!compactNav)} aria-pressed={compactNav}>
-            {compactNav ? "Expanded nav" : "Compact nav"}
-          </button>
-        </div>
-      </header>
-
-      <main id="sign-in" className="login-layout" tabIndex={-1}>
-        <section className="intro" aria-labelledby="welcome-title">
-          <p className="eyebrow"><span /> YOUR QUIET SPACE</p>
-          <h1 id="welcome-title">Make room for<br /><em>what matters.</em></h1>
-          <p className="intro-copy">Yoru gives your work a little more clarity, and your day a little more room to breathe.</p>
-          <div className="trust-line"><span className="avatar-stack" aria-hidden="true"><i>J</i><i>M</i><i>S</i></span><span>Thoughtfully made for focused teams</span></div>
-        </section>
-
-        <section className="login-card" aria-labelledby="login-title">
-          <div className="card-heading"><p className="eyebrow">WELCOME BACK</p><h2 id="login-title">Sign in to continue</h2><p>Enter your details below to pick up where you left off.</p></div>
-          <form onSubmit={submit}>
-            <div className="field"><label htmlFor="email">Email address</label><input id="email" name="email" type="email" autoComplete="email" placeholder="you@example.com" required /></div>
-            <div className="field"><div className="label-row"><label htmlFor="password">Password</label><a href="#forgot">Forgot password?</a></div><div className="password-wrap"><input id="password" name="password" type={showPassword ? "text" : "password"} autoComplete="current-password" placeholder="Enter your password" required /><button type="button" onClick={() => setShowPassword(!showPassword)} aria-label={`${showPassword ? "Hide" : "Show"} password`}>{showPassword ? "Hide" : "Show"}</button></div></div>
-            <label className="check-row"><input type="checkbox" name="remember" /><span>Remember me for 30 days</span></label>
-            <button className="btn-yoru" type="submit" disabled={loading}>{loading ? <DotLoader /> : "Sign in"}<span aria-hidden="true">→</span></button>
+      <a className="skip-link" href="#login-form">Skip to sign in</a>
+      <section className="login-panel" aria-labelledby="welcome-title">
+        <a className="brand-mark" href="#login-form" aria-label="inSpace home"><span /></a>
+        <div className="login-content">
+          <p className="welcome-kicker">Welcome to</p>
+          <h1 id="welcome-title">inSpace</h1>
+          <form id="login-form" onSubmit={submit}>
+            <div className="field">
+              <label htmlFor="email">Email</label>
+              <input id="email" name="email" type="email" autoComplete="email" defaultValue="bonjourguys@talk.com" required />
+            </div>
+            <div className="field">
+              <div className="label-row"><label htmlFor="password">Password</label><a href="#forgot">Forgot password?</a></div>
+              <div className="password-field">
+                <input id="password" name="password" type={showPassword ? "text" : "password"} autoComplete="current-password" defaultValue="inspace" required />
+                <button type="button" onClick={() => setShowPassword((value) => !value)} aria-label={showPassword ? "Hide password" : "Show password"}><EyeIcon open={showPassword} /></button>
+              </div>
+            </div>
+            <label className="remember"><input type="checkbox" name="remember" /><span>Keep me signed in</span></label>
+            <button className="btn-yoru" type="submit" disabled={loading}>{loading ? <DotLoader /> : "Login"}</button>
             <p className="form-notice" aria-live="polite">{notice}</p>
           </form>
-          <p className="signup">New to Yoru? <a href="#create-account">Create an account</a></p>
-        </section>
-      </main>
+          <p className="signup">Don&apos;t have an account? <a href="#sign-up">Sign up</a></p>
+        </div>
+      </section>
 
-      <aside className="theme-dock" aria-label="Appearance settings">
-        <div className="appearance-heading"><span className="color-orb" aria-hidden="true" /><div><p>Appearance</p><span>Make it yours</span></div></div>
-        <fieldset className="accent-picker"><legend>Accent color</legend><div className="swatches">{accents.map((item) => <button key={item.name} className={accent === item.name ? "selected" : ""} style={{ "--swatch": item.color } as React.CSSProperties} type="button" onClick={() => setAccent(item.name)} aria-label={`Use ${item.label} accent`} aria-pressed={accent === item.name}><i /><span>{item.label}</span></button>)}</div></fieldset>
-        <fieldset className="canvas-picker"><legend>Canvas mood</legend><div className="canvas-options">{(["aurora", "paper", "midnight"] as Background[]).map((option) => <button className={background === option ? "selected" : ""} key={option} type="button" onClick={() => setBackground(option)} aria-pressed={background === option}><i aria-hidden="true" />{option}</button>)}</div></fieldset>
-      </aside>
-      <footer><span>© 2025 Yoru Studio</span><a href="#privacy">Privacy</a><a href="#terms">Terms</a><span className="status"><i /> All systems calm</span></footer>
-    </div>
+      <section
+        className="scene-panel"
+        aria-label="inSpace at night illustration"
+      >
+        <div className="scene-image" aria-hidden="true"><Image src={sceneAsset} alt="" fill priority sizes="(max-width: 900px) 100vw, 58vw" /></div>
+        <div className="scene-tint" aria-hidden="true" />
+        <div className="theme-toolbar" aria-label="Theme controls">
+          <button type="button" onClick={() => setDark((value) => !value)} aria-label={`Switch to ${dark ? "light" : "dark"} mode`}><ThemeIcon dark={dark} /></button>
+          <fieldset><legend>Canvas</legend>{(["aurora", "paper", "midnight"] as Background[]).map((option) => <button key={option} className={background === option ? "selected" : ""} type="button" onClick={() => setBackground(option)} aria-pressed={background === option}>{option}</button>)}</fieldset>
+        </div>
+        <fieldset className="gradient-picker">
+          <legend>Appearance</legend>
+          <p>Accent and illustration gradient</p>
+          <div className="gradient-options">
+            {(Object.keys(gradients) as Gradient[]).map((option) => {
+              const item = gradients[option];
+              return <button key={option} className={gradient === option ? "selected" : ""} type="button" onClick={() => setGradient(option)} aria-pressed={gradient === option} aria-label={`Use ${item.label} on the illustration`} style={{ "--option-start": item.start, "--option-end": item.end } as CSSProperties}><i aria-hidden="true" /><span>{item.label}</span></button>;
+            })}
+          </div>
+        </fieldset>
+      </section>
+    </main>
   );
 }
