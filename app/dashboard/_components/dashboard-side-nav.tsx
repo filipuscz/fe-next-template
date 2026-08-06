@@ -1,0 +1,8 @@
+"use client";
+
+import { ArrowLeftFromLine, ArrowRightFromLine, Boxes, ClipboardList, FileText, LayoutDashboard, MoreHorizontal } from "lucide-react";
+import { ProfileMenu } from "./profile-menu";
+
+export function DashboardSideNav({ collapsed, mobileOpen, onToggle, onDismiss }: { collapsed: boolean; mobileOpen: boolean; onToggle: () => void; onDismiss: () => void }) {
+  return <><button type="button" className={`mobile-nav-scrim ${mobileOpen ? "is-visible" : ""}`} onClick={onDismiss} aria-label="Close navigation menu" /><aside id="dashboard-sidebar" className={`side-nav-yoru ${collapsed ? "is-collapsed" : ""} ${mobileOpen ? "is-mobile-open" : ""}`} aria-label="Dashboard sections"><div className="side-nav-head"><span>Workspace</span><button type="button" onClick={onToggle} aria-label={collapsed ? "Expand sidebar" : "Collapse sidebar"}>{collapsed ? <ArrowRightFromLine /> : <ArrowLeftFromLine />}</button></div><a className="side-nav-item active" href="/dashboard" onClick={onDismiss}><LayoutDashboard /><span>Dashboard</span></a><p className="side-nav-label">Modules</p><a className="side-nav-item" href="#forms" onClick={onDismiss}><FileText /><span>Forms</span></a><a className="side-nav-item" href="#orders" onClick={onDismiss}><ClipboardList /><span>Tables</span></a><a className="side-nav-item" href="#components" onClick={onDismiss}><Boxes /><span>Components</span></a><div className="side-nav-user side-nav-user--desktop"><span className="user-avatar">YP</span><span><b>Yorupus</b><small>Workspace owner</small></span><MoreHorizontal /></div><ProfileMenu placement="sidebar" /></aside></>;
+}

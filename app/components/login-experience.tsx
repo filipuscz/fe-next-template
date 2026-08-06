@@ -24,6 +24,10 @@ function EyeIcon({ open }: { open: boolean }) {
   );
 }
 
+function MailIcon() {
+  return <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5.5" width="17" height="13" rx="2" /><path d="m4.5 7 7.5 5.7L19.5 7" /></svg>;
+}
+
 function ThemeIcon({ dark }: { dark: boolean }) {
   return dark ? <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 15.2A8.6 8.6 0 0 1 8.8 4 8.6 8.6 0 1 0 20 15.2Z" /></svg> : <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3.5" /><path d="M12 2.5v2M12 19.5v2M21.5 12h-2M4.5 12h-2M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4M18.7 18.7l-1.4-1.4M6.7 6.7 5.3 5.3" /></svg>;
 }
@@ -65,12 +69,16 @@ export default function LoginExperience() {
           <form id="login-form" onSubmit={submit}>
             <div className="field">
               <label htmlFor="email">Email</label>
-              <input id="email" name="email" type="email" autoComplete="email" required />
+              <div className="field-control">
+                <MailIcon />
+                <input id="email" name="email" type="email" autoComplete="email" inputMode="email" placeholder="name@company.com" aria-describedby="email-help" required />
+              </div>
+              <p id="email-help" className="field-help">Use the email connected to your workspace.</p>
             </div>
             <div className="field">
               <div className="label-row"><label htmlFor="password">Password</label><a href="#forgot">Forgot password?</a></div>
               <div className="password-field">
-                <input id="password" name="password" type={showPassword ? "text" : "password"} autoComplete="current-password" required />
+                <input id="password" name="password" type={showPassword ? "text" : "password"} autoComplete="current-password" placeholder="Enter your password" required />
                 <button type="button" onClick={() => setShowPassword((value) => !value)} aria-label={showPassword ? "Hide password" : "Show password"}><EyeIcon open={showPassword} /></button>
               </div>
             </div>
