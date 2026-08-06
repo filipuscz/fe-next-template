@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import "../globals.css";
+import { WorkspaceShell } from "@/app/_components/app-shell/workspace-shell";
 import { DashboardContent } from "./_components/dashboard-content";
-import { DashboardExperience } from "./_components/dashboard-experience";
 
 export const metadata: Metadata = {
   title: "Dashboard — YoruSpace",
@@ -9,5 +9,5 @@ export const metadata: Metadata = {
 };
 
 export default function DashboardPage() {
-  return <DashboardExperience><DashboardContent /></DashboardExperience>;
+  return <WorkspaceShell><DashboardContent /></WorkspaceShell>;
 }
