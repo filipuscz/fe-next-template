@@ -82,7 +82,7 @@ export function Dropdown({ label, items, ariaLabel, direction = "down", triggerS
   return <div className={`dropdown-yoru dropdown-yoru--${direction}`} ref={controlRef}>
     <div className={split ? "dropdown-yoru-split" : undefined}>
       {split && <button className={`${triggerClass} dropdown-yoru-primary-action`} type="button" onClick={onPrimaryAction}>{label}</button>}
-      <button className={triggerClass} type="button" ref={triggerRef} onClick={() => toggle()} onKeyDown={onTriggerKeyDown} aria-haspopup="menu" aria-expanded={open} aria-controls={menuId} aria-label={ariaLabel ?? (typeof label === "string" ? `${label} menu` : "Open menu")}>{split ? <><span className="sr-only">Open menu</span><ChevronDown aria-hidden="true" /></> : <>{label}<ChevronDown aria-hidden="true" /></>}</button>
+      <button className={triggerClass} type="button" ref={triggerRef} onClick={() => toggle()} onKeyDown={onTriggerKeyDown} aria-haspopup="menu" aria-expanded={open} aria-controls={menuId} aria-label={ariaLabel ?? (typeof label === "string" ? `${label} menu` : "Open menu")} data-state={open ? "open" : "closed"}>{split ? <><span className="sr-only">Open menu</span><ChevronDown aria-hidden="true" /></> : <>{label}<ChevronDown aria-hidden="true" /></>}</button>
     </div>
     {open && <div id={menuId} className="dropdown-yoru-menu" role="menu" aria-label={ariaLabel ?? "Dropdown menu"} onKeyDown={onMenuKeyDown}>{items.map(renderItem)}</div>}
   </div>;

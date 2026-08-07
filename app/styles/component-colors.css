@@ -1,0 +1,432 @@
+/* Accessible color contract for the complete /components catalogue. */
+
+html body .dashboard-yoru main.component-showcase {
+  --dash-paper: var(--color-canvas);
+  --dash-card: var(--color-surface);
+  --dash-ink: var(--color-foreground);
+  --dash-muted: var(--color-muted);
+  --dash-line: var(--color-border);
+  --accent: var(--color-primary);
+  --accent-soft: var(--color-primary-subtle);
+  --accent-focus: var(--color-focus);
+  --on-accent: var(--color-primary-foreground);
+  color: var(--color-foreground);
+  background: var(--color-canvas);
+}
+
+html body .dashboard-yoru main.component-showcase :is(
+  [class*="showcase-card"],
+  [class*="showcase-empty"],
+  .accordion-yoru,
+  .list-group-yoru,
+  .dropdown-yoru-menu,
+  .modal-yoru-content,
+  .offcanvas-yoru-panel,
+  .pagination-yoru-control,
+  .placeholder-profile-card
+) {
+  border-color: var(--color-border);
+  background-color: var(--color-surface);
+  box-shadow: var(--shadow-card);
+}
+
+html body .dashboard-yoru main.component-showcase :is(
+  [class*="showcase-heading"] h2,
+  [class*="showcase-heading"] h3,
+  [class*="showcase-empty"] h2,
+  .accordion-yoru h3,
+  .modal-yoru-header h2,
+  .offcanvas-yoru-header h2,
+  .list-group-yoru-title,
+  .pagination-showcase-alignment b
+) { color: var(--color-foreground); }
+
+html body .dashboard-yoru main.component-showcase :is(
+  [class*="showcase-description"],
+  [class*="showcase-example"] > p,
+  [class*="showcase-empty"] > p,
+  [class*="showcase-toolbar"] > p,
+  .list-group-yoru-description,
+  .accordion-yoru-panel p,
+  .modal-yoru-body,
+  .offcanvas-yoru-body,
+  .dropdown-yoru-header,
+  .placeholder-row > span,
+  .progress-yoru-label,
+  .pagination-showcase-alignment span
+) { color: var(--color-muted); }
+
+html body .dashboard-yoru main.component-showcase :is(
+  .dashboard-eyebrow,
+  .card-kicker,
+  [class*="showcase-heading"] > span,
+  .dropdown-yoru-header
+) { color: var(--color-subtle); }
+
+html body .dashboard-yoru main.component-showcase :is(
+  .dropdown-yoru-trigger,
+  .pagination-yoru-control,
+  .alert-showcase-reset,
+  .modal-yoru-inline-control,
+  .offcanvas-yoru-close,
+  .accordion-yoru h3 button,
+  .collapse-yoru-trigger
+) {
+  border-color: var(--color-border);
+  color: var(--color-foreground);
+  background-color: var(--color-surface-raised);
+}
+
+html body .dashboard-yoru main.component-showcase :is(
+  .dropdown-yoru-trigger:hover:not(:disabled),
+  .pagination-yoru-control:hover:not(:disabled),
+  .alert-showcase-reset:hover:not(:disabled),
+  .accordion-yoru h3 button:hover,
+  .collapse-yoru-trigger:hover
+) {
+  border-color: var(--color-primary-border);
+  color: var(--color-primary);
+  background-color: var(--color-primary-subtle);
+  filter: none;
+}
+
+html body .dashboard-yoru main.component-showcase .button-yoru {
+  --button-ink: var(--color-primary-foreground);
+  --button-surface: var(--color-primary);
+  --button-line: var(--color-primary);
+  color: var(--button-ink);
+  border-color: var(--button-line);
+  background: var(--button-surface);
+}
+
+html body .dashboard-yoru main.component-showcase .button-yoru:hover:not(:disabled) {
+  filter: none;
+}
+
+html body .dashboard-yoru main.component-showcase .button-yoru--primary:hover:not(:disabled) {
+  --button-surface: var(--color-primary-hover);
+  --button-line: var(--color-primary-hover);
+}
+
+html body .dashboard-yoru main.component-showcase .button-yoru--secondary {
+  --button-ink: var(--color-foreground);
+  --button-surface: var(--color-surface-raised);
+  --button-line: var(--color-border);
+}
+
+html body .dashboard-yoru main.component-showcase .button-yoru--success { --button-ink: var(--color-success); --button-surface: var(--color-success-surface); --button-line: color-mix(in srgb, var(--color-success) 36%, var(--color-surface)); }
+html body .dashboard-yoru main.component-showcase .button-yoru--warning { --button-ink: var(--color-warning); --button-surface: var(--color-warning-surface); --button-line: color-mix(in srgb, var(--color-warning) 36%, var(--color-surface)); }
+html body .dashboard-yoru main.component-showcase .button-yoru--danger { --button-ink: var(--color-danger); --button-surface: var(--color-danger-surface); --button-line: color-mix(in srgb, var(--color-danger) 36%, var(--color-surface)); }
+html body .dashboard-yoru main.component-showcase .button-yoru--info { --button-ink: var(--color-info); --button-surface: var(--color-info-surface); --button-line: color-mix(in srgb, var(--color-info) 36%, var(--color-surface)); }
+
+html body .dashboard-yoru main.component-showcase .button-yoru--subtle {
+  color: var(--button-line);
+  border-color: transparent;
+  background: color-mix(in srgb, var(--button-line) 14%, var(--color-surface));
+}
+
+html body .dashboard-yoru main.component-showcase .button-yoru--outline {
+  color: var(--button-line);
+  border-color: var(--button-line);
+  background: transparent;
+}
+
+html body .dashboard-yoru main.component-showcase .button-yoru--subtle:hover:not(:disabled),
+html body .dashboard-yoru main.component-showcase .button-yoru--outline:hover:not(:disabled) {
+  color: var(--button-ink);
+  border-color: var(--button-line);
+  background: color-mix(in srgb, var(--button-line) 20%, var(--color-surface));
+}
+
+/* Dropdowns retain their variant hierarchy after the shared control surface is applied. */
+html body .dashboard-yoru main.component-showcase .dropdown-showcase-heading h2 {
+  font-size: clamp(1.125rem, 1.6vw, 1.3rem);
+  line-height: 1.2;
+}
+
+html body .dashboard-yoru main.component-showcase .dropdown-yoru-trigger.dropdown-yoru-trigger {
+  color: var(--dropdown-ink);
+  border-color: var(--dropdown-line);
+  background: var(--dropdown-surface);
+}
+
+html body .dashboard-yoru main.component-showcase .dropdown-yoru-trigger--primary {
+  --dropdown-ink: var(--color-primary-foreground);
+  --dropdown-surface: var(--color-primary);
+  --dropdown-line: var(--color-primary);
+}
+
+html body .dashboard-yoru main.component-showcase .dropdown-yoru-trigger--secondary {
+  --dropdown-ink: var(--color-foreground);
+  --dropdown-surface: var(--color-surface-raised);
+  --dropdown-line: var(--color-border);
+}
+
+html body .dashboard-yoru main.component-showcase .dropdown-yoru-trigger--outline {
+  --dropdown-ink: var(--color-primary);
+  --dropdown-surface: transparent;
+  --dropdown-line: var(--color-primary-border);
+}
+
+html body .dashboard-yoru main.component-showcase .dropdown-yoru-trigger--link {
+  --dropdown-ink: var(--color-primary);
+  --dropdown-surface: transparent;
+  --dropdown-line: transparent;
+}
+
+html body .dashboard-yoru main.component-showcase .dropdown-yoru-trigger.dropdown-yoru-trigger--primary:hover,
+html body .dashboard-yoru main.component-showcase .dropdown-yoru-trigger.dropdown-yoru-trigger--primary[aria-expanded="true"] {
+  --dropdown-surface: var(--color-primary-hover);
+  --dropdown-line: var(--color-primary-hover);
+}
+
+html body .dashboard-yoru main.component-showcase .dropdown-yoru-trigger.dropdown-yoru-trigger--secondary:hover,
+html body .dashboard-yoru main.component-showcase .dropdown-yoru-trigger.dropdown-yoru-trigger--secondary[aria-expanded="true"],
+html body .dashboard-yoru main.component-showcase .dropdown-yoru-trigger.dropdown-yoru-trigger--outline:hover,
+html body .dashboard-yoru main.component-showcase .dropdown-yoru-trigger.dropdown-yoru-trigger--outline[aria-expanded="true"] {
+  border-color: var(--color-primary-border);
+  color: var(--color-primary);
+  background: var(--color-primary-subtle);
+}
+
+html body .dashboard-yoru main.component-showcase .dropdown-yoru-trigger.dropdown-yoru-trigger--link:hover,
+html body .dashboard-yoru main.component-showcase .dropdown-yoru-trigger.dropdown-yoru-trigger--link[aria-expanded="true"] {
+  color: var(--color-primary-hover);
+  background: transparent;
+}
+
+html body .dashboard-yoru main.component-showcase .badge-yoru { --badge-ink: var(--color-primary); --badge-surface: var(--color-primary-subtle); border-color: var(--color-primary-border); }
+html body .dashboard-yoru main.component-showcase .badge-yoru--secondary { --badge-ink: var(--color-muted); --badge-surface: color-mix(in srgb, var(--color-muted) 12%, var(--color-surface)); border-color: var(--color-border); }
+html body .dashboard-yoru main.component-showcase .badge-yoru--success { --badge-ink: var(--color-success); --badge-surface: var(--color-success-surface); border-color: color-mix(in srgb, var(--color-success) 35%, var(--color-surface)); }
+html body .dashboard-yoru main.component-showcase .badge-yoru--warning { --badge-ink: var(--color-warning); --badge-surface: var(--color-warning-surface); border-color: color-mix(in srgb, var(--color-warning) 35%, var(--color-surface)); }
+html body .dashboard-yoru main.component-showcase .badge-yoru--destructive { --badge-ink: var(--color-danger); --badge-surface: var(--color-danger-surface); border-color: color-mix(in srgb, var(--color-danger) 35%, var(--color-surface)); }
+
+html body .dashboard-yoru main.component-showcase .alert-yoru { --alert-ink: var(--color-info); --alert-surface: var(--color-info-surface); --alert-line: color-mix(in srgb, var(--color-info) 35%, var(--color-surface)); }
+html body .dashboard-yoru main.component-showcase .alert-yoru--success { --alert-ink: var(--color-success); --alert-surface: var(--color-success-surface); --alert-line: color-mix(in srgb, var(--color-success) 35%, var(--color-surface)); }
+html body .dashboard-yoru main.component-showcase .alert-yoru--warning { --alert-ink: var(--color-warning); --alert-surface: var(--color-warning-surface); --alert-line: color-mix(in srgb, var(--color-warning) 35%, var(--color-surface)); }
+html body .dashboard-yoru main.component-showcase .alert-yoru--destructive { --alert-ink: var(--color-danger); --alert-surface: var(--color-danger-surface); --alert-line: color-mix(in srgb, var(--color-danger) 35%, var(--color-surface)); }
+
+html body .dashboard-yoru main.component-showcase :is(
+  .progress-yoru,
+  .placeholder-yoru,
+  .orders-card td,
+  .list-group-yoru-item + .list-group-yoru-item,
+  .accordion-yoru-item + .accordion-yoru-item,
+  .modal-yoru-header,
+  .modal-yoru-footer,
+  .offcanvas-yoru-header
+) { border-color: var(--color-border); }
+
+html body .dashboard-yoru main.component-showcase .progress-yoru { background: color-mix(in srgb, var(--color-muted) 12%, var(--color-surface)); }
+html body .dashboard-yoru main.component-showcase .progress-yoru-fill--primary { --progress-surface: var(--color-primary); }
+html body .dashboard-yoru main.component-showcase .progress-yoru-fill--success { --progress-surface: var(--color-success); }
+html body .dashboard-yoru main.component-showcase .progress-yoru-fill--warning { --progress-surface: var(--color-warning); }
+html body .dashboard-yoru main.component-showcase .progress-yoru-fill--danger { --progress-surface: var(--color-danger); }
+html body .dashboard-yoru main.component-showcase .progress-yoru-fill--info { --progress-surface: var(--color-info); }
+
+html body .dashboard-yoru main.component-showcase :is(
+  button,
+  a,
+  input,
+  select,
+  textarea,
+  [role="button"]
+):focus-visible {
+  outline: 3px solid var(--color-focus);
+  outline-offset: 3px;
+  box-shadow: 0 0 0 5px color-mix(in srgb, var(--color-focus) 24%, transparent);
+}
+
+html body .dashboard-yoru main.component-showcase :is(
+  .button-yoru:disabled,
+  .dropdown-yoru-item:disabled,
+  .pagination-yoru-control:disabled,
+  .alert-showcase-reset:disabled
+) {
+  color: var(--color-subtle);
+  border-color: var(--color-border);
+  background: color-mix(in srgb, var(--color-muted) 8%, var(--color-surface));
+  opacity: 0.72;
+}
+
+/* The same semantic surfaces for the dashboard shell and sign-in route. */
+html body .dashboard-yoru {
+  --dash-paper: var(--color-canvas);
+  --dash-card: var(--color-surface);
+  --dash-ink: var(--color-foreground);
+  --dash-muted: var(--color-muted);
+  --dash-line: var(--color-border);
+  --accent-soft: var(--color-primary-subtle);
+  --accent-focus: var(--color-focus);
+  --on-accent: var(--color-primary-foreground);
+  background: var(--color-canvas);
+}
+
+html body .dashboard-yoru :is(
+  .top-nav-yoru,
+  .side-nav-yoru,
+  .metric-card,
+  .dashboard-card,
+  .dashboard-customize,
+  .notification-popover,
+  .profile-menu
+) {
+  border-color: var(--color-border);
+  background: color-mix(in srgb, var(--color-surface) 94%, transparent);
+  box-shadow: var(--shadow-card);
+}
+
+html body .dashboard-yoru :is(.top-nav-links a,.side-nav-item,.collapse-view,.nav-icon-button,.nav-menu-button):hover,
+html body .dashboard-yoru :is(.top-nav-links a,.side-nav-item).active {
+  color: var(--color-primary);
+  background: var(--color-primary-subtle);
+}
+
+html body .dashboard-yoru :is(.range-button,.period-button,.more-button,.view-all-button,.profile-trigger,.customize-swatches button,.customize-canvases button) {
+  border-color: var(--color-border);
+  color: var(--color-foreground);
+  background: var(--color-surface-raised);
+}
+
+html body .dashboard-yoru :is(.range-button,.period-button,.more-button,.view-all-button,.profile-trigger,.customize-swatches button,.customize-canvases button):hover,
+html body .dashboard-yoru :is(.customize-swatches button,.customize-canvases button).selected {
+  border-color: var(--color-primary-border);
+  color: var(--color-primary);
+  background: var(--color-primary-subtle);
+}
+
+html body .dashboard-yoru .status-badge.completed { color: var(--color-success); background: var(--color-success-surface); }
+html body .dashboard-yoru .status-badge.pending { color: var(--color-warning); background: var(--color-warning-surface); }
+html body .dashboard-yoru .status-badge.cancelled { color: var(--color-danger); background: var(--color-danger-surface); }
+
+html body .login-page {
+  --ink: var(--color-foreground);
+  --muted: var(--color-muted);
+  --line: var(--color-border);
+  --paper: var(--color-canvas);
+  --on-accent: var(--color-primary-foreground);
+  --accent-soft: var(--color-primary-subtle);
+  --accent-focus: var(--color-focus);
+  --input-surface: var(--color-surface);
+  --input-line: var(--color-border);
+  --login-scene-wash: color-mix(in srgb, var(--color-primary) 12%, transparent);
+  --login-scene-shade: color-mix(in srgb, var(--color-foreground) 16%, transparent);
+  --login-scene-foreground: #fffdf8;
+}
+
+html body .login-page.background-paper { --login-scene-wash: color-mix(in srgb, #f5e7d2 24%, var(--color-primary)); --login-scene-shade: color-mix(in srgb, #553c2d 20%, transparent); }
+html body .login-page.background-midnight { --login-scene-wash: color-mix(in srgb, #0f1724 34%, var(--color-primary)); --login-scene-shade: color-mix(in srgb, #090d16 38%, transparent); }
+html body .login-page.theme-dark { --login-scene-wash: color-mix(in srgb, var(--color-primary) 18%, #10131b); --login-scene-shade: color-mix(in srgb, #080b12 46%, transparent); }
+html body .login-page.theme-dark.background-paper { --login-scene-wash: color-mix(in srgb, #32272b 30%, var(--color-primary)); }
+html body .login-page.theme-dark.background-midnight { --login-scene-wash: color-mix(in srgb, #070a12 48%, var(--color-primary)); --login-scene-shade: color-mix(in srgb, #03050a 58%, transparent); }
+
+/* The curved panel exposes the page beneath it, so both layers share one surface. */
+html body .login-page { background: var(--color-surface); }
+html body .login-page .login-panel { background: var(--color-surface); }
+html body .login-page .welcome-kicker { color: var(--color-primary); }
+html body .login-page .field label { color: var(--color-foreground); }
+html body .login-page :is(.field-help, .remember, .signup) { color: var(--color-muted); }
+html body .login-page :is(.label-row a, .signup a) { color: var(--color-primary); }
+html body .login-page .field input { border-color: var(--color-border); color: var(--color-foreground); background: var(--color-surface-raised); }
+html body .login-page .field input:hover { border-color: var(--color-primary-border); }
+html body .login-page .field input:focus { border-color: var(--color-primary); background: var(--color-surface-raised); box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-focus) 24%, transparent); }
+html body .login-page .btn-yoru { color: var(--color-primary-foreground); background: var(--color-primary); box-shadow: 0 8px 18px color-mix(in srgb, var(--color-primary) 20%, transparent); }
+html body .login-page .btn-yoru:hover { background: var(--color-primary-hover); filter: none; }
+html body .login-page .brand-mark { background: linear-gradient(135deg, var(--accent-gradient-start), var(--accent-gradient-end)); box-shadow: 0 8px 20px color-mix(in srgb, var(--color-primary) 28%, transparent); }
+
+/* Accent identity surfaces: color is intentional, but never competes with reading surfaces. */
+html body .dashboard-yoru .top-nav-yoru {
+  border-color: color-mix(in srgb, var(--color-primary-border) 72%, var(--color-border));
+  color: var(--color-foreground);
+  background: linear-gradient(112deg, color-mix(in srgb, var(--color-surface) 68%, var(--nav-gradient-start)), color-mix(in srgb, var(--color-surface) 64%, var(--nav-gradient-end))) !important;
+  box-shadow: 0 10px 22px color-mix(in srgb, var(--nav-gradient-start) 15%, transparent), inset 0 1px 0 color-mix(in srgb, #fffdf8 42%, transparent);
+}
+
+html body .dashboard-yoru .top-nav-yoru :is(.top-nav-brand, .top-nav-links a, .nav-icon-button, .nav-menu-button) { color: var(--color-foreground); }
+html body .dashboard-yoru .top-nav-yoru :is(.top-nav-links a.active, .top-nav-links a:hover, .nav-icon-button:hover, .nav-menu-button:hover) { color: var(--color-primary); background: color-mix(in srgb, var(--color-primary) 14%, transparent); }
+html body .dashboard-yoru .top-nav-yoru .customize-button { border-color: var(--color-primary-border); color: var(--color-primary); background: color-mix(in srgb, var(--color-primary-subtle) 78%, transparent); }
+html body .dashboard-yoru .top-nav-yoru .customize-button:hover,
+html body .dashboard-yoru .top-nav-yoru .customize-button[aria-expanded="true"] { background: var(--color-primary-subtle); }
+
+html body .dashboard-yoru .profile-trigger {
+  border: 1px solid color-mix(in srgb, var(--accent-border) 68%, var(--color-border));
+  color: var(--color-primary);
+  background: var(--color-primary-subtle);
+  font-weight: 600;
+}
+html body .dashboard-yoru .profile-trigger:hover,
+html body .dashboard-yoru .profile-trigger[aria-expanded="true"] { border-color: var(--color-primary); color: var(--color-primary-foreground); background: var(--color-primary); }
+html body .dashboard-yoru .profile-trigger:focus-visible { outline-color: var(--accent-foreground); outline-offset: 3px; }
+
+html body .dashboard-yoru .side-nav-yoru { overflow: hidden; }
+html body .dashboard-yoru .side-nav-head,
+html body .dashboard-yoru .side-nav-footer { flex: 0 0 auto; }
+html body .dashboard-yoru .side-nav-scroll { display: grid; flex: 1 1 auto; min-height: 0; align-content: start; gap: 2px; overflow-y: auto; overscroll-behavior: contain; padding: 0 2px 10px; -ms-overflow-style: none; scrollbar-width: none; }
+html body .dashboard-yoru .side-nav-scroll::-webkit-scrollbar { display: none; }
+html body .dashboard-yoru .side-nav-footer { margin-top: 8px; border-top: 1px solid var(--color-border); }
+html body .dashboard-yoru .side-nav-footer .side-nav-user { margin-top: 0; border-top: 0; }
+
+html body .dashboard-yoru main.component-showcase :is(
+  [class*="showcase-heading"] > span,
+  .accordion-yoru h3 button[aria-expanded="true"],
+  .collapse-yoru[data-state="open"],
+  .dropdown-yoru-item[aria-selected="true"],
+  .list-group-yoru-item[aria-current="true"],
+  .pagination-yoru-control[aria-current="page"],
+  .sortable-yoru-item[data-dragging="true"]
+) {
+  border-color: var(--color-primary-border);
+  color: var(--color-primary);
+  background: var(--color-primary-subtle);
+}
+
+html body .dashboard-yoru main.component-showcase :is(
+  .accordion-yoru h3 button[aria-expanded="true"] svg,
+  .collapse-yoru[data-state="open"] .collapse-yoru-content > svg,
+  .modal-yoru-header svg,
+  .offcanvas-yoru-header svg,
+  .popover-yoru-icon,
+  .sortable-yoru-handle
+) { color: var(--color-primary); background: var(--color-primary-subtle); }
+
+html body .dashboard-yoru main.component-showcase :is(
+  .dropdown-yoru-trigger[aria-expanded="true"],
+  .pagination-yoru-control[aria-current="page"],
+  .modal-yoru-primary-action,
+  .offcanvas-yoru-primary-action,
+  .popover-yoru-trigger--primary,
+  .sortable-yoru-item.is-selected
+) { border-color: var(--color-primary); color: var(--color-primary-foreground); background: var(--color-primary); }
+
+html body .dashboard-yoru main.component-showcase :is(
+  .dropdown-yoru-trigger[aria-expanded="true"],
+  .pagination-yoru-control[aria-current="page"],
+  .modal-yoru-primary-action,
+  .offcanvas-yoru-primary-action,
+  .popover-yoru-trigger--primary
+):hover { border-color: var(--color-primary-hover); background: var(--color-primary-hover); }
+
+html body .login-page .scene-panel { background: var(--scene-start); }
+html body .login-page .scene-image img { filter: saturate(1.12) contrast(1.06); }
+html body .login-page .scene-tint {
+  background: linear-gradient(135deg, color-mix(in srgb, var(--scene-start) 58%, transparent), color-mix(in srgb, var(--scene-end) 42%, transparent)), var(--login-scene-wash);
+  mix-blend-mode: color;
+  opacity: 0.9;
+}
+html body .login-page .scene-panel::after { background: linear-gradient(180deg, var(--login-scene-shade), color-mix(in srgb, var(--login-scene-shade) 70%, transparent)); }
+html body .login-page :is(.theme-toolbar, .gradient-picker) { color: var(--login-scene-foreground); }
+html body .login-page :is(.theme-toolbar > button, .theme-toolbar fieldset, .gradient-picker) {
+  border-color: color-mix(in srgb, var(--login-scene-foreground) 34%, transparent);
+  background: color-mix(in srgb, var(--color-canvas) 18%, transparent);
+  box-shadow: 0 12px 28px color-mix(in srgb, var(--color-foreground) 24%, transparent);
+}
+html body .login-page .theme-toolbar fieldset button { color: inherit; }
+html body .login-page .theme-toolbar fieldset button.selected,
+html body .login-page .gradient-options button.selected {
+  border-color: color-mix(in srgb, var(--login-scene-foreground) 78%, transparent);
+  background: color-mix(in srgb, var(--color-primary) 50%, transparent);
+}
+html body .login-page .gradient-options button { color: var(--login-scene-foreground); background: color-mix(in srgb, var(--color-canvas) 12%, transparent); }
+html body .login-page .gradient-options button:hover { background: color-mix(in srgb, var(--color-primary) 32%, transparent); }
+html body .login-page .brand-mark span,
+html body .login-page .gradient-picker .selected i { background: linear-gradient(135deg, var(--accent-gradient-start), var(--accent-gradient-end)); }

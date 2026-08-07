@@ -1,4 +1,4 @@
-@theme {
+@theme inline {
   --font-sans: var(--font-plus-jakarta-sans), Arial, Helvetica, sans-serif;
   --color-brand: var(--color-primary);
   --color-app-surface: var(--color-surface);
@@ -12,15 +12,18 @@
 }
 
 :root {
-  --color-canvas: #f7f5fb;
-  --color-surface: #fffdfa;
-  --color-surface-raised: #ffffff;
-  --color-foreground: #292741;
-  --color-muted: #625e74;
-  --color-subtle: #736f88;
-  --color-border: #e4e0ec;
+  --color-canvas: #f8f8fc;
+  --color-surface: #fdfcff;
+  --color-surface-raised: #f8f7fc;
+  --color-foreground: #24212f;
+  --color-muted: #5f5a70;
+  --color-subtle: #797386;
+  --color-border: #dedbe7;
   --color-primary: #5638df;
-  --color-primary-foreground: #ffffff;
+  --color-primary-foreground: #fbfaff;
+  --color-primary-hover: #452ab9;
+  --color-primary-subtle: #eeeafe;
+  --color-primary-border: #cfc5f3;
   --color-primary-end: #744de8;
   --color-success: #24734d;
   --color-success-surface: #e0f2e7;
@@ -41,19 +44,22 @@
 .dashboard-yoru,
 .login-page {
   --color-primary: var(--accent, #5638df);
-  --color-primary-foreground: var(--accent-foreground, #ffffff);
-  --color-primary-end: var(--accent-end, #744de8);
+  --color-primary-foreground: var(--accent-foreground, #fbfaff);
+  --color-primary-hover: var(--accent-hover, #452ab9);
+  --color-primary-subtle: var(--accent-subtle, #eeeafe);
+  --color-primary-border: var(--accent-border, #cfc5f3);
+  --color-primary-end: var(--accent-gradient-end, #744de8);
   --color-focus: var(--color-primary);
 }
 
 .dashboard-yoru {
-  --color-canvas: #f7f5fb;
-  --color-surface: #fffdfa;
-  --color-surface-raised: #ffffff;
-  --color-foreground: #292741;
-  --color-muted: #625e74;
-  --color-subtle: #736f88;
-  --color-border: #e4e0ec;
+  --color-canvas: #f8f8fc;
+  --color-surface: #fdfcff;
+  --color-surface-raised: #f8f7fc;
+  --color-foreground: #24212f;
+  --color-muted: #5f5a70;
+  --color-subtle: #797386;
+  --color-border: #dedbe7;
   --dash-paper: var(--color-canvas);
   --dash-card: var(--color-surface);
   --dash-ink: var(--color-foreground);
@@ -62,18 +68,21 @@
   --on-accent: var(--color-primary-foreground);
 }
 
-.dashboard-yoru.background-paper { --color-canvas: #f1ede6; --color-surface: #faf7f0; }
-.dashboard-yoru.background-midnight { --color-canvas: #e9e6f2; --color-surface: #f6f3fa; }
+.dashboard-yoru.background-paper { --color-canvas: #faf8f5; --color-surface: #fdfaf5; --color-surface-raised: #f8f3eb; }
+.dashboard-yoru.background-midnight { --color-canvas: #f5f4fa; --color-surface: #fcfbff; --color-surface-raised: #f7f5fc; }
+
+.login-page.background-paper { --color-canvas: #f4ede2; --color-surface: #fcf7ef; --color-surface-raised: #f7efe4; --color-border: #ded4c5; }
+.login-page.background-midnight { --color-canvas: #edf1f8; --color-surface: #f8faff; --color-surface-raised: #f0f4fb; --color-border: #d6dce8; }
 
 .dashboard-yoru.theme-dark,
 .login-page.theme-dark {
-  --color-canvas: #252330;
-  --color-surface: #302d3d;
-  --color-surface-raised: #373342;
-  --color-foreground: #f4f1f8;
+  --color-canvas: #191721;
+  --color-surface: #24212d;
+  --color-surface-raised: #2d2938;
+  --color-foreground: #f7f5fa;
   --color-muted: #d0cadb;
-  --color-subtle: #c5bfd0;
-  --color-border: #5b556c;
+  --color-subtle: #aba4b9;
+  --color-border: #484251;
   --color-success: #9bdbb7;
   --color-success-surface: #244a38;
   --color-warning: #f2ca87;
@@ -84,5 +93,7 @@
   --color-info-surface: #2b3852;
 }
 
-.dashboard-yoru.theme-dark.background-paper { --color-canvas: #383342; --color-surface: #423c4a; }
-.dashboard-yoru.theme-dark.background-midnight { --color-canvas: #201e2b; --color-surface: #2a2736; }
+.dashboard-yoru.theme-dark.background-paper { --color-canvas: #242029; --color-surface: #2d2832; }
+.dashboard-yoru.theme-dark.background-midnight { --color-canvas: #15131b; --color-surface: #201d28; }
+.login-page.theme-dark.background-paper { --color-canvas: #262124; --color-surface: #30292c; --color-surface-raised: #3a3235; --color-border: #51464a; }
+.login-page.theme-dark.background-midnight { --color-canvas: #11141e; --color-surface: #1a1e2a; --color-surface-raised: #242a37; --color-border: #3b4354; }

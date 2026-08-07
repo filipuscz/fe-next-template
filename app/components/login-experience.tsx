@@ -3,7 +3,8 @@
 import Image from "next/image";
 import { useState } from "react";
 import type { CSSProperties, SubmitEvent } from "react";
-import { accents, backgrounds, type Accent, type Background } from "@/app/_lib/workspace-theme";
+import { accents, backgrounds, type Accent } from "@/app/_lib/workspace-theme";
+import { useWorkspacePreferences } from "@/app/_components/providers/workspace-preferences-provider";
 
 const sceneAsset = "https://images.pexels.com/photos/167699/pexels-photo-167699.jpeg?auto=compress&cs=tinysrgb&w=1600";
 
@@ -28,13 +29,11 @@ function DotLoader() {
 }
 
 export default function LoginExperience() {
-  const [gradient, setGradient] = useState<Accent>("violet");
-  const [background, setBackground] = useState<Background>("aurora");
-  const [dark, setDark] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [notice, setNotice] = useState("");
-  const currentGradient = accents[gradient];
+  const { accent, background, dark, setAccent, setBackground, setDark } = useWorkspacePreferences();
+  const currentAccent = accents[accent][dark ? "dark" : "light"];
 
   function submit(event: SubmitEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -49,7 +48,7 @@ export default function LoginExperience() {
   return (
     <main
       className={`login-page ${dark ? "theme-dark" : "theme-light"} background-${background}`}
-      style={{ "--accent": currentGradient.primary, "--accent-foreground": currentGradient.primaryForeground, "--accent-end": currentGradient.primaryEnd, "--scene-start": currentGradient.start, "--scene-end": currentGradient.end } as CSSProperties}
+      style={{ "--accent": currentAccent.primary, "--accent-foreground": currentAccent.foreground, "--accent-hover": currentAccent.hover, "--accent-subtle": currentAccent.subtle, "--accent-border": currentAccent.border, "--accent-gradient-start": currentAccent.gradientStart, "--accent-gradient-end": currentAccent.gradientEnd, "--accent-end": currentAccent.gradientEnd, "--nav-gradient-start": currentAccent.navGradientStart, "--nav-gradient-end": currentAccent.navGradientEnd, "--scene-start": currentAccent.gradientStart, "--scene-end": currentAccent.gradientEnd } as CSSProperties}
     >
       <a className="skip-link" href="#login-form">Skip to sign in</a>
       <section className="login-panel" aria-labelledby="welcome-title">
@@ -88,7 +87,7 @@ export default function LoginExperience() {
         <div className="scene-image" aria-hidden="true"><Image src={sceneAsset} alt="" fill priority sizes="(max-width: 900px) 100vw, 58vw" /></div>
         <div className="scene-tint" aria-hidden="true" />
         <div className="theme-toolbar" aria-label="Theme controls">
-          <button type="button" onClick={() => setDark((value) => !value)} aria-label={`Switch to ${dark ? "light" : "dark"} mode`}><ThemeIcon dark={dark} /></button>
+          <button type="button" onClick={() => setDark(!dark)} aria-label={`Switch to ${dark ? "light" : "dark"} mode`}><ThemeIcon dark={dark} /></button>
           <fieldset><legend>Canvas</legend>{backgrounds.map((option) => <button key={option} className={background === option ? "selected" : ""} type="button" onClick={() => setBackground(option)} aria-pressed={background === option}>{option}</button>)}</fieldset>
         </div>
         <fieldset className="gradient-picker">
@@ -97,7 +96,8 @@ export default function LoginExperience() {
           <div className="gradient-options">
             {(Object.keys(accents) as Accent[]).map((option) => {
               const item = accents[option];
-              return <button key={option} className={gradient === option ? "selected" : ""} type="button" onClick={() => setGradient(option)} aria-pressed={gradient === option} aria-label={`Use ${item.label} on the illustration`} style={{ "--option-start": item.start, "--option-end": item.end } as CSSProperties}><i aria-hidden="true" /><span>{item.label}</span></button>;
+              const optionTokens = item[dark ? "dark" : "light"];
+              return <button key={option} className={accent === option ? "selected" : ""} type="button" onClick={() => setAccent(option)} aria-pressed={accent === option} aria-label={`Use ${item.label} throughout YoruSpace`} style={{ "--option-start": optionTokens.gradientStart, "--option-end": optionTokens.gradientEnd } as CSSProperties}><i aria-hidden="true" /><span>{item.label}</span></button>;
             })}
           </div>
         </fieldset>
