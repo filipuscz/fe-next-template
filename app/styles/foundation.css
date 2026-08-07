@@ -1,0 +1,101 @@
+@layer base {
+  html { background: var(--color-canvas); }
+  body { color: var(--color-foreground); font-family: var(--font-sans); font-size: 16px; font-weight: 400; line-height: 1.5; }
+  button, input, select, textarea { font: inherit; }
+  :where(button, a, input, select, textarea, [tabindex]):focus-visible { outline: 3px solid color-mix(in srgb, var(--color-focus) 72%, white); outline-offset: 3px; }
+  :where(button, [role="button"], input, select, textarea) { touch-action: manipulation; }
+  h1, h2, h3, h4 { color: var(--color-foreground); font-weight: 600; letter-spacing: -0.035em; text-wrap: balance; }
+  h1 { font-size: clamp(2rem, 4vw, 3rem); line-height: 1.1; }
+  h2 { font-size: clamp(1.75rem, 3vw, 2.5rem); line-height: 1.15; }
+  h3 { font-size: clamp(1.375rem, 2.5vw, 1.75rem); line-height: 1.2; }
+  h4 { font-size: clamp(1.125rem, 2vw, 1.5rem); line-height: 1.25; }
+  p { max-width: var(--content-measure); }
+}
+
+/* Semantic component overrides keep legacy showcase markup consistent. */
+.dashboard-yoru .top-nav-yoru,
+.dashboard-yoru .side-nav-yoru,
+.dashboard-yoru .metric-card,
+.dashboard-yoru .dashboard-card,
+.dashboard-yoru [class$="-showcase-card"],
+.dashboard-yoru [class*="-showcase-card--"] {
+  border-color: var(--color-border);
+  background-color: var(--color-surface);
+  box-shadow: var(--shadow-card);
+}
+
+.dashboard-yoru .top-nav-links a,
+.dashboard-yoru .profile-trigger,
+.dashboard-yoru .side-nav-item,
+.dashboard-yoru .range-button,
+.dashboard-yoru .period-button,
+.dashboard-yoru .more-button,
+.dashboard-yoru .view-all-button,
+.dashboard-yoru .button-yoru,
+.dashboard-yoru .pagination-yoru-control,
+.dashboard-yoru .dropdown-yoru-item,
+.dashboard-yoru .alert-showcase-reset {
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.dashboard-yoru .dashboard-eyebrow,
+.dashboard-yoru .card-kicker,
+.dashboard-yoru .side-nav-label,
+.dashboard-yoru .side-nav-head,
+.dashboard-yoru .orders-card th,
+.dashboard-yoru [class$="-showcase-heading"] > span {
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.dashboard-yoru .dashboard-header > div > p:last-child,
+.dashboard-yoru .metric-card-head > span:first-child,
+.dashboard-yoru .orders-card td,
+.dashboard-yoru .activity-list p,
+.dashboard-yoru [class$="-showcase-description"],
+.dashboard-yoru [class$="-showcase-example"] > p {
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+.dashboard-yoru .dashboard-header h1 { font-size: clamp(2rem, 4vw, 3rem); line-height: 1.1; }
+.dashboard-yoru .dashboard-card h2,
+.dashboard-yoru [class$="-showcase-heading"] h2 { font-size: clamp(1.375rem, 2.2vw, 1.75rem); line-height: 1.2; }
+.dashboard-yoru .metric-card strong,
+.dashboard-yoru .revenue-summary strong { font-size: clamp(1.5rem, 2.6vw, 2rem); font-weight: 600; }
+
+.dashboard-yoru .button-yoru { min-height: 44px; color: var(--color-primary-foreground); background: var(--color-primary); border-color: var(--color-primary); }
+.dashboard-yoru .button-yoru--secondary { color: var(--color-foreground); background: color-mix(in srgb, var(--color-muted) 13%, var(--color-surface)); border-color: transparent; }
+.dashboard-yoru .button-yoru--success { color: var(--color-success); background: var(--color-success-surface); border-color: color-mix(in srgb, var(--color-success) 35%, transparent); }
+.dashboard-yoru .button-yoru--danger { color: var(--color-danger); background: var(--color-danger-surface); border-color: color-mix(in srgb, var(--color-danger) 35%, transparent); }
+.dashboard-yoru .button-yoru--warning { color: var(--color-warning); background: var(--color-warning-surface); border-color: color-mix(in srgb, var(--color-warning) 35%, transparent); }
+.dashboard-yoru .button-yoru--info { color: var(--color-info); background: var(--color-info-surface); border-color: color-mix(in srgb, var(--color-info) 35%, transparent); }
+.dashboard-yoru .button-yoru--subtle { background: color-mix(in srgb, currentColor 10%, transparent); }
+.dashboard-yoru .button-yoru--outline { background: transparent; }
+.dashboard-yoru .button-yoru--sm { min-height: 40px; font-size: 0.875rem; }
+.dashboard-yoru .button-yoru--lg { min-height: 48px; font-size: 1rem; }
+.dashboard-yoru .button-yoru--icon { width: 44px; }
+
+.dashboard-yoru .badge-yoru--success, .dashboard-yoru .status-badge.completed { color: var(--color-success); background: var(--color-success-surface); }
+.dashboard-yoru .badge-yoru--warning, .dashboard-yoru .status-badge.pending { color: var(--color-warning); background: var(--color-warning-surface); }
+.dashboard-yoru .badge-yoru--destructive, .dashboard-yoru .status-badge.cancelled { color: var(--color-danger); background: var(--color-danger-surface); }
+.dashboard-yoru .alert-yoru { --alert-ink: var(--color-info); --alert-surface: var(--color-info-surface); --alert-line: color-mix(in srgb, var(--color-info) 42%, var(--color-surface)); }
+.dashboard-yoru .alert-yoru--success { --alert-ink: var(--color-success); --alert-surface: var(--color-success-surface); --alert-line: color-mix(in srgb, var(--color-success) 42%, var(--color-surface)); }
+.dashboard-yoru .alert-yoru--warning { --alert-ink: var(--color-warning); --alert-surface: var(--color-warning-surface); --alert-line: color-mix(in srgb, var(--color-warning) 42%, var(--color-surface)); }
+.dashboard-yoru .alert-yoru--destructive { --alert-ink: var(--color-danger); --alert-surface: var(--color-danger-surface); --alert-line: color-mix(in srgb, var(--color-danger) 42%, var(--color-surface)); }
+
+.login-page h1 { font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 700; line-height: 1.1; }
+.login-page .welcome-kicker { font-size: clamp(1.25rem, 2.3vw, 1.65rem); font-weight: 600; }
+.login-page .field label, .login-page .label-row a, .login-page .remember, .login-page .signup { font-size: 0.875rem; font-weight: 500; }
+.login-page .field input { min-height: 52px; font-size: 1rem; }
+.login-page .btn-yoru { min-height: 52px; font-size: 1rem; font-weight: 600; }
+
+@media (max-width: 48rem) {
+  .dashboard-yoru .dashboard-main, .dashboard-yoru .component-showcase { padding-right: var(--space-page-x); padding-left: var(--space-page-x); }
+  .dashboard-yoru .top-nav-links a { font-size: 1rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { scroll-behavior: auto !important; transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; }
+}

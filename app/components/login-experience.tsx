@@ -3,18 +3,9 @@
 import Image from "next/image";
 import { useState } from "react";
 import type { CSSProperties, SubmitEvent } from "react";
+import { accents, backgrounds, type Accent, type Background } from "@/app/_lib/workspace-theme";
 
 const sceneAsset = "https://images.pexels.com/photos/167699/pexels-photo-167699.jpeg?auto=compress&cs=tinysrgb&w=1600";
-
-type Gradient = "violet" | "sunset" | "ocean" | "lime";
-type Background = "aurora" | "paper" | "midnight";
-
-const gradients: Record<Gradient, { label: string; start: string; end: string }> = {
-  violet: { label: "Violet dusk", start: "#5638df", end: "#c548d5" },
-  sunset: { label: "Sunset gold", start: "#f0518a", end: "#ffc85c" },
-  ocean: { label: "Ocean blue", start: "#096bdb", end: "#4ee1d2" },
-  lime: { label: "Electric lime", start: "#82bd32", end: "#24b9b2" },
-};
 
 function EyeIcon({ open }: { open: boolean }) {
   return open ? (
@@ -37,13 +28,13 @@ function DotLoader() {
 }
 
 export default function LoginExperience() {
-  const [gradient, setGradient] = useState<Gradient>("violet");
+  const [gradient, setGradient] = useState<Accent>("violet");
   const [background, setBackground] = useState<Background>("aurora");
   const [dark, setDark] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [notice, setNotice] = useState("");
-  const currentGradient = gradients[gradient];
+  const currentGradient = accents[gradient];
 
   function submit(event: SubmitEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -58,7 +49,7 @@ export default function LoginExperience() {
   return (
     <main
       className={`login-page ${dark ? "theme-dark" : "theme-light"} background-${background}`}
-      style={{ "--accent": currentGradient.start, "--scene-start": currentGradient.start, "--scene-end": currentGradient.end } as CSSProperties}
+      style={{ "--accent": currentGradient.primary, "--accent-foreground": currentGradient.primaryForeground, "--accent-end": currentGradient.primaryEnd, "--scene-start": currentGradient.start, "--scene-end": currentGradient.end } as CSSProperties}
     >
       <a className="skip-link" href="#login-form">Skip to sign in</a>
       <section className="login-panel" aria-labelledby="welcome-title">
@@ -98,14 +89,14 @@ export default function LoginExperience() {
         <div className="scene-tint" aria-hidden="true" />
         <div className="theme-toolbar" aria-label="Theme controls">
           <button type="button" onClick={() => setDark((value) => !value)} aria-label={`Switch to ${dark ? "light" : "dark"} mode`}><ThemeIcon dark={dark} /></button>
-          <fieldset><legend>Canvas</legend>{(["aurora", "paper", "midnight"] as Background[]).map((option) => <button key={option} className={background === option ? "selected" : ""} type="button" onClick={() => setBackground(option)} aria-pressed={background === option}>{option}</button>)}</fieldset>
+          <fieldset><legend>Canvas</legend>{backgrounds.map((option) => <button key={option} className={background === option ? "selected" : ""} type="button" onClick={() => setBackground(option)} aria-pressed={background === option}>{option}</button>)}</fieldset>
         </div>
         <fieldset className="gradient-picker">
           <legend>Appearance</legend>
           <p>Accent and illustration gradient</p>
           <div className="gradient-options">
-            {(Object.keys(gradients) as Gradient[]).map((option) => {
-              const item = gradients[option];
+            {(Object.keys(accents) as Accent[]).map((option) => {
+              const item = accents[option];
               return <button key={option} className={gradient === option ? "selected" : ""} type="button" onClick={() => setGradient(option)} aria-pressed={gradient === option} aria-label={`Use ${item.label} on the illustration`} style={{ "--option-start": item.start, "--option-end": item.end } as CSSProperties}><i aria-hidden="true" /><span>{item.label}</span></button>;
             })}
           </div>
