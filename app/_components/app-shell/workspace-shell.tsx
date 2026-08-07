@@ -8,7 +8,7 @@ import { AppearancePanel } from "./appearance-panel";
 import { WorkspaceSideNav } from "./workspace-side-nav";
 import { WorkspaceTopNav } from "./workspace-top-nav";
 
-export function WorkspaceShell({ children, mainId = "dashboard-content", activePage = "dashboard" }: { children: ReactNode; mainId?: string; activePage?: "dashboard" | "accordion" | "alert" | "badge" | "button" | "collapse" | "dropdown" | "list-group" | "modal" | "progress" | "offcanvas" }) {
+export function WorkspaceShell({ children, mainId = "dashboard-content", activePage = "dashboard" }: { children: ReactNode; mainId?: string; activePage?: "dashboard" | "accordion" | "alert" | "badge" | "button" | "collapse" | "dropdown" | "list-group" | "modal" | "progress" | "offcanvas" | "placeholders" }) {
   const [customizeOpen, setCustomizeOpen] = useState(false);
   const [collapsed, setCollapsed] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
