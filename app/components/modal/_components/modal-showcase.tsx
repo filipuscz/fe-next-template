@@ -1,0 +1,23 @@
+"use client";
+
+import * as Popover from "@radix-ui/react-popover";
+import * as Tooltip from "@radix-ui/react-tooltip";
+import { Info, MessageCircleMore, Sparkles } from "lucide-react";
+import { Button } from "@/app/components/ui/button";
+import { Modal } from "@/app/components/ui/modal";
+
+const longContent = ["Use an internal scroll area when a dialog needs to preserve its actions while a user reads a longer update.", "This pattern keeps the dialog header and close action visible, even when the content is longer than the available viewport.", "On compact screens, the panel uses the same safe inset as the overlay so content remains reachable without horizontal overflow.", "The content area remains the only scrolling region, which keeps the surrounding workspace stable and makes the task boundary clear.", "Keyboard focus stays inside the dialog until the user closes it with a button or the Escape key."];
+
+function ShowcaseCard({ eyebrow, title, note, children }: { eyebrow: string; title: string; note: string; children: React.ReactNode }) {
+  return <section className="modal-showcase-card"><div className="modal-showcase-heading"><div><p className="card-kicker">{eyebrow}</p><h2>{title}</h2></div><span>{note}</span></div>{children}</section>;
+}
+
+export function ModalShowcase() {
+  return <main id="component-content" className="dashboard-main component-showcase modal-showcase"><header className="component-showcase-header"><p className="dashboard-eyebrow">Components <span>/</span> Modals</p><h1>Modals</h1><p>Add dialogs to your site for lightboxes, user notifications, or completely custom content without losing the user’s place.</p></header><div className="modal-showcase-grid">
+    <ShowcaseCard eyebrow="Foundation" title="Basic Modal" note="Backdrop + Escape"><Modal trigger={<Button>Open modal</Button>} title="Invite your team" description="Share a workspace link with the people who need it."><p className="modal-showcase-copy">Your workspace is ready to share. Invite collaborators when you are ready to review the next milestone together.</p></Modal></ShowcaseCard>
+    <ShowcaseCard eyebrow="Protection" title="Static backdrop" note="Intentional close"><Modal trigger={<Button appearance="outline">Open static modal</Button>} title="Changes are waiting" description="Review this notification before you continue." staticBackdrop><p className="modal-showcase-copy">Clicks outside this dialog are ignored, so the notification stays in context until you deliberately close it.</p></Modal></ShowcaseCard>
+    <ShowcaseCard eyebrow="Overflow" title="Scrolling long content" note="Scroll body"><Modal trigger={<Button variant="info">Read update</Button>} title="Release notes" description="A longer message keeps the panel actions available." scrollBody><div className="modal-showcase-long-copy">{longContent.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}</div></Modal></ShowcaseCard>
+    <ShowcaseCard eyebrow="Placement" title="Vertically centered" note="Balanced viewport"><Modal trigger={<Button appearance="subtle">Show confirmation</Button>} title="Save this view?" description="Your dashboard layout will be remembered for the next visit."><div className="modal-showcase-notice"><Sparkles aria-hidden="true" /><div><b>Ready when you are</b><p>Centered placement gives a short confirmation room to breathe.</p></div></div></Modal></ShowcaseCard>
+    <ShowcaseCard eyebrow="Helpful context" title="Tooltips and popovers" note="Keyboard ready"><Modal trigger={<Button iconLeft={<MessageCircleMore aria-hidden="true" />}>Open custom content</Button>} title="Workspace insights" description="Helpful detail is available without leaving the dialog."><Tooltip.Provider delayDuration={180}><div className="modal-showcase-overlay-actions"><Tooltip.Root><Tooltip.Trigger asChild><button type="button" className="modal-yoru-inline-control" aria-label="What are workspace insights?"><Info aria-hidden="true" /> What is this?</button></Tooltip.Trigger><Tooltip.Content className="modal-yoru-tooltip" sideOffset={8}>A concise summary of the activity that needs attention.<Tooltip.Arrow className="modal-yoru-tooltip-arrow" /></Tooltip.Content></Tooltip.Root><Popover.Root><Popover.Trigger asChild><button type="button" className="modal-yoru-inline-control">View details</button></Popover.Trigger><Popover.Content className="modal-yoru-popover" sideOffset={8}><b>Weekly signal</b><p>Three collaborators opened the project brief today.</p><Popover.Arrow className="modal-yoru-popover-arrow" /></Popover.Content></Popover.Root></div></Tooltip.Provider></Modal></ShowcaseCard>
+  </div></main>;
+}
