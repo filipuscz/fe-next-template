@@ -12,6 +12,8 @@ export const workspacePageIds = [
   "progress",
   "offcanvas",
   "placeholders",
+  "popovers",
+  "sortable",
 ] as const;
 
 export type WorkspacePageId = (typeof workspacePageIds)[number];
@@ -29,6 +31,8 @@ export const componentNavigation = [
   { id: "progress", label: "Progress", href: "/components/progress" },
   { id: "offcanvas", label: "Offcanvas", href: "/components/offcanvas" },
   { id: "placeholders", label: "Placeholders", href: "/components/placeholders" },
+  { id: "popovers", label: "Popovers", href: "/components/popovers" },
+  { id: "sortable", label: "Sortable", href: "/components/sortable" },
 ] as const satisfies ReadonlyArray<{ id: Exclude<WorkspacePageId, "dashboard">; label: string; href: string }>;
 
 export function componentNavigationItem(page: Exclude<WorkspacePageId, "dashboard">) {

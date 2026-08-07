@@ -1,0 +1,140 @@
+/* Typography contract for every /components/* route.
+   These selectors intentionally outrank the showcase's legacy per-component rules. */
+
+html body .dashboard-yoru main.component-showcase {
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+html body .dashboard-yoru main.component-showcase .component-showcase-header h1 {
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 600;
+  letter-spacing: -0.04em;
+  line-height: 1.1;
+}
+
+html body .dashboard-yoru main.component-showcase .component-showcase-header > p:last-child {
+  max-width: 65ch;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+html body .dashboard-yoru main.component-showcase [class*="showcase-heading"] h2,
+html body .dashboard-yoru main.component-showcase [class*="showcase-empty"] h2 {
+  font-size: clamp(1.75rem, 3vw, 2.5rem);
+  font-weight: 600;
+  letter-spacing: -0.035em;
+  line-height: 1.15;
+}
+
+html body .dashboard-yoru main.component-showcase [class*="showcase-heading"] h3,
+html body .dashboard-yoru main.component-showcase .accordion-yoru h3,
+html body .dashboard-yoru main.component-showcase .alert-yoru-copy h3 {
+  font-size: clamp(1.375rem, 2.2vw, 1.75rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+html body .dashboard-yoru main.component-showcase [class*="showcase-description"],
+html body .dashboard-yoru main.component-showcase [class*="showcase-example"] > p,
+html body .dashboard-yoru main.component-showcase [class*="showcase-empty"] > p,
+html body .dashboard-yoru main.component-showcase [class*="showcase-toolbar"] > p,
+html body .dashboard-yoru main.component-showcase .accordion-yoru-panel p,
+html body .dashboard-yoru main.component-showcase .alert-yoru-copy > div,
+html body .dashboard-yoru main.component-showcase .offcanvas-demo-message p,
+html body .dashboard-yoru main.component-showcase .list-group-yoru-description {
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+html body .dashboard-yoru main.component-showcase [class*="showcase-heading"] > span,
+html body .dashboard-yoru main.component-showcase .dashboard-eyebrow,
+html body .dashboard-yoru main.component-showcase .card-kicker,
+html body .dashboard-yoru main.component-showcase .dropdown-yoru-header,
+html body .dashboard-yoru main.component-showcase .orders-card th {
+  font-size: 0.75rem;
+  font-weight: 500;
+  line-height: 1.35;
+}
+
+html body .dashboard-yoru main.component-showcase :is(
+  .button-yoru,
+  .dropdown-yoru-trigger,
+  .dropdown-yoru-item,
+  .pagination-yoru-control,
+  .alert-showcase-reset,
+  .alert-yoru-action,
+  .modal-yoru-inline-control,
+  .offcanvas-demo-nav a,
+  .accordion-yoru h3 button,
+  .collapse-yoru-trigger
+) {
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1.25;
+}
+
+html body .dashboard-yoru main.component-showcase :is(
+  input,
+  select,
+  textarea,
+  .date-input,
+  .dropdown-yoru-input
+) {
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+html body .dashboard-yoru main.component-showcase :is(
+  .button-yoru,
+  .dropdown-yoru-trigger,
+  .pagination-yoru-control,
+  .alert-showcase-reset,
+  .accordion-yoru h3 button,
+  .collapse-yoru-trigger
+) {
+  min-height: 44px;
+}
+
+html body .dashboard-yoru main.component-showcase :is(
+  .badge-yoru,
+  .status-badge,
+  .progress-yoru-label,
+  .pagination-showcase-alignment span,
+  .list-group-yoru-title,
+  .offcanvas-demo-nav b,
+  .offcanvas-demo-nav small,
+  .placeholder-row > span
+) {
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+html body .dashboard-yoru main.component-showcase :is(
+  .modal-yoru-body,
+  .modal-yoru-footer,
+  .offcanvas-yoru-body,
+  .list-group-yoru-item,
+  .pagination-showcase-example,
+  .progress-showcase-list
+) {
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+@media (max-width: 760px) {
+  html body .dashboard-yoru main.component-showcase .component-showcase-header h1 {
+    font-size: clamp(2rem, 10vw, 2.5rem);
+  }
+
+  html body .dashboard-yoru main.component-showcase [class*="showcase-heading"] h2,
+  html body .dashboard-yoru main.component-showcase [class*="showcase-empty"] h2 {
+    font-size: clamp(1.75rem, 8vw, 2rem);
+  }
+}
