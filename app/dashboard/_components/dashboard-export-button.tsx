@@ -9,5 +9,5 @@ export function DashboardExportButton() {
     setExported(true);
     window.setTimeout(() => setExported(false), 2200);
   }
-  return <button className={`btn-yoru dashboard-export ${exported ? "is-complete" : ""}`} type="button" onClick={exportDashboard} aria-live="polite">{exported ? <><Check />Ready</> : <><Download />Export</>}</button>;
+  return <button className={`button-yoru button-yoru--primary dashboard-export ${exported ? "is-complete" : ""}`} type="button" onClick={exportDashboard} aria-live="polite">{exported ? <><Check />Ready</> : <><Download />Export</>}</button>;
 }

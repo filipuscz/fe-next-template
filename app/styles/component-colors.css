@@ -330,8 +330,8 @@ html body .login-page :is(.label-row a, .signup a) { color: var(--color-primary)
 html body .login-page .field input { border-color: var(--color-border); color: var(--color-foreground); background: var(--color-surface-raised); }
 html body .login-page .field input:hover { border-color: var(--color-primary-border); }
 html body .login-page .field input:focus { border-color: var(--color-primary); background: var(--color-surface-raised); box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-focus) 24%, transparent); }
-html body .login-page .btn-yoru { color: var(--color-primary-foreground); background: var(--color-primary); box-shadow: 0 8px 18px color-mix(in srgb, var(--color-primary) 20%, transparent); }
-html body .login-page .btn-yoru:hover { background: var(--color-primary-hover); filter: none; }
+html body .login-page .button-yoru--primary { color: var(--color-primary-foreground); background: var(--color-primary); box-shadow: 0 8px 18px color-mix(in srgb, var(--color-primary) 20%, transparent); }
+html body .login-page .button-yoru--primary:hover { background: var(--color-primary-hover); filter: none; }
 html body .login-page .brand-mark { background: linear-gradient(135deg, var(--accent-gradient-start), var(--accent-gradient-end)); box-shadow: 0 8px 20px color-mix(in srgb, var(--color-primary) 28%, transparent); }
 
 /* Accent identity surfaces: color is intentional, but never competes with reading surfaces. */
@@ -365,6 +365,8 @@ html body .dashboard-yoru .side-nav-scroll { display: grid; flex: 1 1 auto; min-
 html body .dashboard-yoru .side-nav-scroll::-webkit-scrollbar { display: none; }
 html body .dashboard-yoru .side-nav-footer { margin-top: 8px; border-top: 1px solid var(--color-border); }
 html body .dashboard-yoru .side-nav-footer .side-nav-user { margin-top: 0; border-top: 0; }
+html body .dashboard-yoru .side-nav-item-grandchild { min-height: 38px; padding-left: 2.25rem; font-size: .75rem; }
+html body .dashboard-yoru .side-nav-item-grandchild.active::after { right: 0; }
 
 html body .dashboard-yoru main.component-showcase :is(
   [class*="showcase-heading"] > span,
@@ -430,3 +432,164 @@ html body .login-page .gradient-options button { color: var(--login-scene-foregr
 html body .login-page .gradient-options button:hover { background: color-mix(in srgb, var(--color-primary) 32%, transparent); }
 html body .login-page .brand-mark span,
 html body .login-page .gradient-picker .selected i { background: linear-gradient(135deg, var(--accent-gradient-start), var(--accent-gradient-end)); }
+
+html body .tooltips-showcase-card {
+  max-width: 760px;
+  padding: clamp(1.125rem, 3vw, 1.5rem);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-card);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-card);
+}
+html body .tooltips-showcase-heading { display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; }
+html body .tooltips-showcase-heading h2 { margin: 0; color: var(--color-foreground); font-size: clamp(1.375rem, 2vw, 1.625rem); font-weight: 600; }
+html body .tooltips-showcase-heading > span { flex: none; padding: .375rem .625rem; border: 1px solid var(--color-primary-border); border-radius: 999px; color: var(--color-primary); background: var(--color-primary-subtle); font-size: .8125rem; font-weight: 600; }
+html body .tooltips-showcase-description { max-width: 60ch; margin: .75rem 0 1.5rem; color: var(--color-muted); font-size: 1rem; line-height: 1.5; }
+html body .tooltips-showcase-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+html body .tooltips-showcase-example { display: grid; place-items: center; gap: .625rem; min-height: 116px; padding: 1rem; border: 1px solid var(--color-border); border-radius: 1rem; background: color-mix(in srgb, var(--color-primary-subtle) 42%, var(--color-surface)); }
+html body .tooltips-showcase-example > span { color: var(--color-muted); font-size: .8125rem; font-weight: 500; }
+html body .tooltips-showcase-hint { display: flex; align-items: flex-start; gap: .5rem; margin: 1.25rem 0 0; color: var(--color-muted); font-size: .875rem; line-height: 1.5; }
+html body .tooltips-showcase-hint svg { width: 1rem; height: 1rem; flex: none; margin-top: .125rem; color: var(--color-primary); }
+
+html body .tooltip-yoru { z-index: 50; max-width: min(280px, calc(100vw - 2rem)); padding: .625rem .75rem; border: 1px solid var(--tooltip-border); border-radius: .75rem; color: var(--tooltip-foreground); background: var(--tooltip-surface); box-shadow: 0 12px 28px color-mix(in srgb, var(--tooltip-foreground) 18%, transparent); font-size: .8125rem; font-weight: 500; line-height: 1.45; }
+html body .tooltip-yoru-arrow { fill: var(--tooltip-surface); stroke: var(--tooltip-border); stroke-width: 1px; }
+html body .tooltip-yoru[data-state="delayed-open"], html body .tooltip-yoru[data-state="instant-open"] { animation: tooltip-yoru-enter 160ms ease-out; }
+@keyframes tooltip-yoru-enter { from { opacity: 0; transform: translateY(4px) scale(.98); } to { opacity: 1; transform: translateY(0) scale(1); } }
+@media (max-width: 640px) { html body .tooltips-showcase-grid { grid-template-columns: 1fr; } html body .tooltips-showcase-example { min-height: 104px; } }
+@media (prefers-reduced-motion: reduce) { html body .tooltip-yoru[data-state="delayed-open"], html body .tooltip-yoru[data-state="instant-open"] { animation: none; } }
+
+/* Forms catalogue */
+html body .dashboard-yoru main.forms-showcase { color: var(--color-foreground); }
+html body .dashboard-yoru .forms-showcase-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; align-items: start; }
+html body .dashboard-yoru .forms-showcase-grid--wide { grid-template-columns: 1fr; max-width: 900px; }
+html body .dashboard-yoru .forms-showcase-card { min-width: 0; padding: clamp(1rem, 2.5vw, 1.5rem); border: 1px solid var(--color-border); border-radius: var(--radius-card); background: var(--color-surface); box-shadow: var(--shadow-card); }
+html body .dashboard-yoru .forms-showcase-heading { display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; margin-bottom: 1rem; }
+html body .dashboard-yoru .forms-showcase-heading h2 { margin: 0; color: var(--color-foreground); font-size: clamp(1.25rem, 2vw, 1.5rem); font-weight: 600; }
+html body .dashboard-yoru .forms-showcase-heading > span { flex: none; padding: .375rem .625rem; border: 1px solid var(--color-primary-border); border-radius: 999px; color: var(--color-primary); background: var(--color-primary-subtle); font-size: .75rem; font-weight: 600; }
+html body .dashboard-yoru .forms-stack, html body .dashboard-yoru .forms-check-list { display: grid; gap: .75rem; }
+html body .dashboard-yoru .forms-field { display: grid; gap: .375rem; color: var(--color-foreground); font-size: .875rem; font-weight: 500; }
+html body .dashboard-yoru .forms-field > small, html body .dashboard-yoru .forms-hint { color: var(--color-muted); font-size: .75rem; font-weight: 400; line-height: 1.45; }
+html body .dashboard-yoru .forms-input, html body .dashboard-yoru .forms-editor textarea { width: 100%; min-height: 44px; padding: 0 .75rem; border: 1px solid var(--color-border); border-radius: .75rem; color: var(--color-foreground); background: var(--color-surface-raised); font: inherit; font-size: 1rem; line-height: 1.5; }
+html body .dashboard-yoru textarea.forms-input { min-height: 104px; padding-top: .75rem; resize: vertical; }
+html body .dashboard-yoru .forms-input--lg { min-height: 52px; font-size: 1.125rem; }
+html body .dashboard-yoru .forms-input--sm { min-height: 36px; font-size: .875rem; }
+html body .dashboard-yoru .forms-input:focus-visible, html body .dashboard-yoru .forms-range:focus-visible, html body .dashboard-yoru .forms-switch input:focus-visible + span { outline: 3px solid var(--color-focus); outline-offset: 2px; border-color: var(--color-primary); }
+html body .dashboard-yoru .forms-input:disabled { color: var(--color-subtle); background: color-mix(in srgb, var(--color-muted) 8%, var(--color-surface)); cursor: not-allowed; }
+html body .dashboard-yoru .forms-input[aria-invalid="true"] { border-color: var(--color-danger); }
+html body .dashboard-yoru :is(.forms-check-list, .forms-choice-list, .forms-input-group) input:is([type="checkbox"], [type="radio"]) { accent-color: var(--color-primary); }
+html body .dashboard-yoru .forms-input[type="file"] { min-height: 48px; padding: .375rem; cursor: pointer; }
+html body .dashboard-yoru .forms-input[type="file"]::file-selector-button { min-height: 34px; margin-right: .625rem; padding: 0 .75rem; border: 1px solid var(--color-primary-border); border-radius: .5rem; color: var(--color-primary); background: var(--color-primary-subtle); cursor: pointer; font: inherit; font-size: .8125rem; font-weight: 600; }
+html body .dashboard-yoru .forms-input[type="file"]:hover::file-selector-button { border-color: var(--color-primary); background: color-mix(in srgb, var(--color-primary-subtle) 72%, var(--color-surface)); }
+html body .dashboard-yoru .forms-plain-text { display: flex; align-items: center; gap: .5rem; margin: 0; color: var(--color-muted); font-size: .875rem; line-height: 1.5; }
+html body .dashboard-yoru .forms-plain-text svg { width: 1rem; color: var(--color-primary); }
+html body .dashboard-yoru .forms-input-group { display: flex; align-items: stretch; overflow: hidden; border: 1px solid var(--color-border); border-radius: .75rem; background: var(--color-surface-raised); }
+html body .dashboard-yoru .forms-input-group > span, html body .dashboard-yoru .forms-input-group > label { display: grid; place-items: center; flex: none; padding: 0 .75rem; border-right: 1px solid var(--color-border); color: var(--color-muted); background: var(--color-primary-subtle); font-size: .875rem; }
+html body .dashboard-yoru .forms-input-group .forms-input { min-width: 0; border: 0; border-radius: 0; }
+html body .dashboard-yoru .forms-input-group .button-yoru { min-height: 42px; border-width: 0 0 0 1px; border-radius: 0; }
+html body .dashboard-yoru .forms-input-group--wrap { flex-wrap: wrap; }
+html body .dashboard-yoru .forms-select-multiple { height: 118px; padding-block: .5rem; }
+html body .dashboard-yoru .forms-check-list { padding: 0; border: 0; margin: 0; color: var(--color-foreground); font-size: .875rem; }
+html body .dashboard-yoru .forms-check-list label, html body .dashboard-yoru .forms-choice-list label { display: flex; align-items: center; gap: .5rem; min-height: 28px; }
+html body .dashboard-yoru .forms-check-inline { display: flex; flex-wrap: wrap; gap: .875rem; }
+html body .dashboard-yoru .forms-switch { display: flex; align-items: center; gap: .625rem; min-height: 44px; cursor: pointer; }
+html body .dashboard-yoru .forms-switch input { position: absolute; opacity: 0; }
+html body .dashboard-yoru .forms-switch > span { position: relative; width: 44px; height: 24px; flex: none; border-radius: 999px; background: var(--color-border); transition: background var(--transition-fast); }
+html body .dashboard-yoru .forms-switch > span::after { position: absolute; top: 3px; left: 3px; width: 18px; height: 18px; border-radius: 50%; content: ""; background: var(--color-surface); transition: transform var(--transition-fast); }
+html body .dashboard-yoru .forms-switch input:checked + span { background: var(--color-primary); }
+html body .dashboard-yoru .forms-switch input:checked + span::after { transform: translateX(20px); }
+html body .dashboard-yoru .forms-toggle-group { display: flex; flex-wrap: wrap; gap: .5rem; }
+html body .dashboard-yoru .forms-range { width: 100%; accent-color: var(--color-primary); }
+html body .dashboard-yoru .forms-range-ends, html body .dashboard-yoru .forms-date-range { display: flex; justify-content: space-between; align-items: center; gap: .625rem; color: var(--color-muted); font-size: .75rem; }
+html body .dashboard-yoru .forms-floating { position: relative; display: block; }
+html body .dashboard-yoru .forms-floating > span { position: absolute; top: .8rem; left: .75rem; color: var(--color-muted); pointer-events: none; transition: transform var(--transition-fast), color var(--transition-fast); }
+html body .dashboard-yoru .forms-floating .forms-input:focus + span, html body .dashboard-yoru .forms-floating .forms-input:not(:placeholder-shown) + span, html body .dashboard-yoru .forms-floating--select > span { transform: translateY(-1.25rem) scale(.82); transform-origin: left; color: var(--color-primary); background: var(--color-surface-raised); }
+html body .dashboard-yoru .forms-grid-form { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+html body .dashboard-yoru .forms-form-actions { display: flex; align-items: center; justify-content: flex-end; gap: .75rem; margin-top: 1rem; }
+html body .dashboard-yoru .forms-grid-form .forms-form-actions { grid-column: 1 / -1; }
+html body .dashboard-yoru .forms-inline-form { display: flex; flex-wrap: wrap; gap: .625rem; }
+html body .dashboard-yoru .forms-inline-form .forms-input { flex: 1 1 220px; }
+html body .dashboard-yoru .forms-search { display: flex; align-items: center; gap: .5rem; margin-bottom: .75rem; padding-inline: .75rem; border: 1px solid var(--color-border); border-radius: .75rem; background: var(--color-surface-raised); }
+html body .dashboard-yoru .forms-search svg { width: 1rem; color: var(--color-muted); }
+html body .dashboard-yoru .forms-search .forms-input { border: 0; }
+html body .dashboard-yoru .forms-tags { display: flex; flex-wrap: wrap; gap: .5rem; min-height: 44px; margin-bottom: .75rem; }
+html body .dashboard-yoru .forms-tags button { min-height: 32px; padding: 0 .625rem; border: 1px solid var(--color-primary-border); border-radius: 999px; color: var(--color-primary); background: var(--color-primary-subtle); cursor: pointer; font: inherit; font-size: .8125rem; }
+html body .dashboard-yoru .forms-choice-list { display: grid; gap: .5rem; }
+html body .dashboard-yoru .forms-command { overflow: hidden; border: 1px solid var(--color-border); border-radius: .875rem; background: var(--color-surface-raised); }
+html body .dashboard-yoru .forms-command-input { display: flex; align-items: center; gap: .5rem; padding: 0 .75rem; border-bottom: 1px solid var(--color-border); }
+html body .dashboard-yoru .forms-command-input svg { width: 1rem; color: var(--color-muted); }
+html body .dashboard-yoru .forms-command-input input { width: 100%; min-height: 44px; border: 0; outline: 0; color: var(--color-foreground); background: transparent; font: inherit; font-size: 1rem; }
+html body .dashboard-yoru .forms-command [cmdk-list] { max-height: 160px; overflow-y: auto; padding: .375rem; }
+html body .dashboard-yoru .forms-command [cmdk-group-heading] { padding: .375rem .5rem; color: var(--color-muted); font-size: .6875rem; font-weight: 600; text-transform: uppercase; }
+html body .dashboard-yoru .forms-command [cmdk-item] { min-height: 40px; display: flex; align-items: center; justify-content: space-between; gap: .75rem; padding: 0 .625rem; border-radius: .5rem; color: var(--color-foreground); cursor: pointer; font-size: .875rem; }
+html body .dashboard-yoru .forms-command [cmdk-item][data-selected="true"] { color: var(--color-primary); background: var(--color-primary-subtle); }
+html body .dashboard-yoru .forms-command [cmdk-item] svg { width: 1rem; }
+html body .dashboard-yoru .forms-command [cmdk-empty] { padding: .75rem; color: var(--color-muted); font-size: .8125rem; text-align: center; }
+html body .dashboard-yoru .forms-editor { overflow: hidden; border: 1px solid var(--color-border); border-radius: .875rem; background: var(--color-surface-raised); }
+html body .dashboard-yoru .forms-editor-toolbar { display: flex; gap: .25rem; padding: .5rem; border-bottom: 1px solid var(--color-border); background: var(--color-primary-subtle); }
+html body .dashboard-yoru .forms-editor textarea { min-height: 160px; border: 0; border-radius: 0; padding: .875rem; }
+html body .dashboard-yoru .forms-inline-editor { min-height: 88px; padding: .875rem; border: 1px dashed var(--color-primary-border); border-radius: .75rem; color: var(--color-foreground); background: var(--color-primary-subtle); }
+html body .dashboard-yoru .forms-dropzone { display: grid; place-items: center; gap: .5rem; min-height: 168px; padding: 1rem; border: 1px dashed var(--color-primary-border); border-radius: 1rem; color: var(--color-muted); background: color-mix(in srgb, var(--color-primary-subtle) 42%, var(--color-surface)); cursor: pointer; text-align: center; }
+html body .dashboard-yoru .forms-dropzone svg { width: 1.5rem; height: 1.5rem; color: var(--color-primary); }
+html body .dashboard-yoru .forms-dropzone b { color: var(--color-foreground); font-size: .875rem; }
+html body .dashboard-yoru .forms-dropzone span { font-size: .75rem; }
+html body .dashboard-yoru .forms-dropzone input { position: absolute; width: 1px; height: 1px; opacity: 0; }
+html body .dashboard-yoru .forms-file-list { display: grid; gap: .375rem; padding: 0; margin: .75rem 0 0; color: var(--color-muted); font-size: .8125rem; list-style: none; }
+html body .dashboard-yoru .forms-success { display: flex; align-items: center; gap: .375rem; color: var(--color-success) !important; font-size: .8125rem !important; }
+html body .dashboard-yoru .forms-success svg { width: 1rem; }
+html body .dashboard-yoru .forms-error { color: var(--color-danger) !important; font-size: .8125rem !important; }
+html body .dashboard-yoru .forms-rating { display: flex; align-items: center; gap: .25rem; color: var(--color-primary); }
+html body .dashboard-yoru .forms-rating button { display: grid; place-items: center; width: 44px; height: 44px; border: 0; border-radius: .75rem; color: inherit; background: transparent; cursor: pointer; }
+html body .dashboard-yoru .forms-rating button:hover, html body .dashboard-yoru .forms-rating button:focus-visible { background: var(--color-primary-subtle); }
+html body .dashboard-yoru .forms-rating svg { width: 1.25rem; height: 1.25rem; }
+html body .dashboard-yoru .forms-emoji-control { position: relative; display: flex; gap: .5rem; }
+html body .dashboard-yoru .forms-emoji-menu { position: absolute; z-index: 5; top: calc(100% + .5rem); right: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: .25rem; padding: .5rem; border: 1px solid var(--color-border); border-radius: .75rem; background: var(--color-surface); box-shadow: var(--shadow-card); }
+html body .dashboard-yoru .forms-emoji-menu button { width: 36px; height: 36px; border: 0; border-radius: .5rem; background: transparent; cursor: pointer; font-size: 1.125rem; }
+html body .dashboard-yoru .forms-emoji-menu button:hover { background: var(--color-primary-subtle); }
+html body .dashboard-yoru .forms-steps { display: flex; gap: .75rem; padding: 0; margin: 0 0 1.5rem; list-style: none; }
+html body .dashboard-yoru .forms-steps li { display: flex; align-items: center; gap: .375rem; color: var(--color-muted); font-size: .8125rem; font-weight: 500; }
+html body .dashboard-yoru .forms-steps span { display: grid; place-items: center; width: 24px; height: 24px; border: 1px solid var(--color-border); border-radius: 50%; background: var(--color-surface-raised); }
+html body .dashboard-yoru .forms-steps .is-current, html body .dashboard-yoru .forms-steps .is-complete { color: var(--color-primary); }
+html body .dashboard-yoru .forms-steps .is-current span, html body .dashboard-yoru .forms-steps .is-complete span { border-color: var(--color-primary); color: var(--color-primary-foreground); background: var(--color-primary); }
+@media (max-width: 760px) { html body .dashboard-yoru .forms-showcase-grid { grid-template-columns: 1fr; } html body .dashboard-yoru .forms-grid-form { grid-template-columns: 1fr; } html body .dashboard-yoru .forms-grid-form .forms-form-actions { grid-column: auto; } html body .dashboard-yoru .forms-input-group--wrap > .forms-input { flex: 1 1 150px; } }
+@media (max-width: 420px) { html body .dashboard-yoru .forms-showcase-heading { gap: .625rem; } html body .dashboard-yoru .forms-showcase-heading > span { font-size: .6875rem; } html body .dashboard-yoru .forms-steps { gap: .375rem; } html body .dashboard-yoru .forms-steps li { font-size: .6875rem; } }
+
+/* Forms parent workbench */
+html body .dashboard-yoru .forms-hub-grid { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(300px, .9fr); gap: 1rem; align-items: start; }
+html body .dashboard-yoru .forms-hub-card { min-width: 0; padding: clamp(1rem, 2.5vw, 1.5rem); border: 1px solid var(--color-border); border-radius: var(--radius-card); background: var(--color-surface); box-shadow: var(--shadow-card); }
+html body .dashboard-yoru .forms-hub-heading { display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; margin-bottom: 1.25rem; }
+html body .dashboard-yoru .forms-hub-heading h2 { margin: 0; color: var(--color-foreground); font-size: clamp(1.25rem, 2vw, 1.5rem); font-weight: 600; }
+html body .dashboard-yoru .forms-hub-heading > span { flex: none; padding: .375rem .625rem; border: 1px solid var(--color-primary-border); border-radius: 999px; color: var(--color-primary); background: var(--color-primary-subtle); font-size: .75rem; font-weight: 600; }
+html body .dashboard-yoru .forms-hub-workbench { display: grid; gap: 1rem; }
+html body .dashboard-yoru .forms-hub-select-trigger { width: 100%; min-height: 44px; display: flex; align-items: center; justify-content: space-between; padding: 0 .75rem; border: 1px solid var(--color-border); border-radius: .75rem; color: var(--color-foreground); background: var(--color-surface-raised); cursor: pointer; font: inherit; font-size: 1rem; }
+html body .dashboard-yoru .forms-hub-select-trigger:focus-visible { outline: 3px solid var(--color-focus); outline-offset: 2px; border-color: var(--color-primary); }
+html body .dashboard-yoru .forms-hub-select-trigger svg { width: 1rem; color: var(--color-muted); }
+html body .forms-hub-select-content { z-index: 60; min-width: var(--radix-select-trigger-width); overflow: hidden; padding: .375rem; border: 1px solid var(--forms-hub-border); border-radius: .75rem; color: var(--forms-hub-foreground); background: var(--forms-hub-surface); box-shadow: 0 14px 30px color-mix(in srgb, var(--forms-hub-foreground) 18%, transparent); }
+html body .forms-hub-select-item { min-height: 40px; display: flex; align-items: center; justify-content: space-between; gap: .75rem; padding: 0 .625rem; border-radius: .5rem; outline: none; cursor: pointer; font-size: .875rem; }
+html body .forms-hub-select-item[data-highlighted], html body .forms-hub-select-item[data-state="checked"] { color: var(--forms-hub-primary); background: var(--forms-hub-primary-subtle); }
+html body .forms-hub-select-item svg { width: 1rem; }
+html body .dashboard-yoru .forms-hub-calendar { display: grid; grid-template-columns: 1fr auto; gap: .5rem; padding: .875rem; border: 1px solid var(--color-border); border-radius: .875rem; background: color-mix(in srgb, var(--color-primary-subtle) 36%, var(--color-surface)); }
+html body .dashboard-yoru .forms-hub-label { display: block; color: var(--color-muted); font-size: .75rem; font-weight: 500; }
+html body .dashboard-yoru .forms-hub-calendar p { margin: .25rem 0 0; color: var(--color-foreground); font-size: .875rem; font-weight: 600; }
+html body .dashboard-yoru .forms-hub-calendar > svg { width: 1.25rem; color: var(--color-primary); }
+html body .dashboard-yoru .rdp-root { margin: 0; color: var(--color-foreground); --rdp-accent-color: var(--color-primary); --rdp-accent-background-color: var(--color-primary-subtle); }
+html body .dashboard-yoru .rdp-month_caption { height: 2rem; display: flex; align-items: center; font-size: .875rem; font-weight: 600; }
+html body .dashboard-yoru .rdp-button_previous, html body .dashboard-yoru .rdp-button_next { width: 32px; height: 32px; border: 1px solid var(--color-border); border-radius: .5rem; color: var(--color-primary); background: var(--color-surface-raised); }
+html body .dashboard-yoru .rdp-day_button { width: 34px; height: 34px; border-radius: .5rem; color: var(--color-foreground); font-size: .8125rem; }
+html body .dashboard-yoru .rdp-selected .rdp-day_button { color: var(--color-primary-foreground); background: var(--color-primary); }
+html body .dashboard-yoru .forms-hub-dropzone { display: grid; place-items: center; gap: .5rem; min-height: 148px; padding: 1rem; border: 1px dashed var(--color-primary-border); border-radius: 1rem; color: var(--color-muted); background: color-mix(in srgb, var(--color-primary-subtle) 42%, var(--color-surface)); cursor: pointer; text-align: center; transition: border-color var(--transition-fast), background var(--transition-fast); }
+html body .dashboard-yoru .forms-hub-dropzone.is-drag-active { border-color: var(--color-primary); background: var(--color-primary-subtle); }
+html body .dashboard-yoru .forms-hub-dropzone svg { width: 1.5rem; height: 1.5rem; color: var(--color-primary); }
+html body .dashboard-yoru .forms-hub-dropzone b { color: var(--color-foreground); font-size: .875rem; }
+html body .dashboard-yoru .forms-hub-dropzone span { font-size: .75rem; }
+html body .dashboard-yoru .forms-hub-file-list { display: grid; gap: .375rem; padding: 0; margin: 0; list-style: none; color: var(--color-success); font-size: .8125rem; }
+html body .dashboard-yoru .forms-hub-file-list li { display: flex; align-items: center; gap: .375rem; }
+html body .dashboard-yoru .forms-hub-file-list svg { width: 1rem; }
+html body .dashboard-yoru .forms-hub-file-list--error { color: var(--color-danger); }
+html body .dashboard-yoru .forms-hub-links { display: grid; gap: .625rem; }
+html body .dashboard-yoru .forms-hub-links a { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: .625rem; min-height: 64px; padding: .75rem; border: 1px solid var(--color-border); border-radius: .875rem; color: var(--color-foreground); background: var(--color-surface-raised); text-decoration: none; transition: border-color var(--transition-fast), background var(--transition-fast); }
+html body .dashboard-yoru .forms-hub-links a:hover { border-color: var(--color-primary-border); background: var(--color-primary-subtle); }
+html body .dashboard-yoru .forms-hub-links a > svg { width: 1rem; color: var(--color-primary); }
+html body .dashboard-yoru .forms-hub-links span { display: grid; gap: .125rem; }
+html body .dashboard-yoru .forms-hub-links b { font-size: .875rem; font-weight: 600; }
+html body .dashboard-yoru .forms-hub-links small { color: var(--color-muted); font-size: .75rem; line-height: 1.35; }
+@media (max-width: 900px) { html body .dashboard-yoru .forms-hub-grid { grid-template-columns: 1fr; } }

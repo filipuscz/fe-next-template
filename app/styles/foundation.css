@@ -89,7 +89,7 @@
 .login-page .welcome-kicker { font-size: clamp(1.25rem, 2.3vw, 1.65rem); font-weight: 600; }
 .login-page .field label, .login-page .label-row a, .login-page .remember, .login-page .signup { font-size: 0.875rem; font-weight: 500; }
 .login-page .field input { min-height: 52px; font-size: 1rem; }
-.login-page .btn-yoru { min-height: 52px; font-size: 1rem; font-weight: 600; }
+.login-page .button-yoru--primary { min-height: 52px; font-size: 1rem; font-weight: 600; }
 
 @media (max-width: 48rem) {
   .dashboard-yoru .dashboard-main, .dashboard-yoru .component-showcase { padding-right: var(--space-page-x); padding-left: var(--space-page-x); }

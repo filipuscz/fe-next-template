@@ -73,7 +73,7 @@ export default function LoginExperience() {
               </div>
             </div>
             <label className="remember"><input type="checkbox" name="remember" /><span>Keep me signed in</span></label>
-            <button className="btn-yoru" type="submit" disabled={loading}>{loading ? <DotLoader /> : "Login"}</button>
+            <button className="button-yoru button-yoru--primary" type="submit" disabled={loading}>{loading ? <DotLoader /> : "Login"}</button>
             <p className="form-notice" aria-live="polite">{notice}</p>
           </form>
           <p className="signup">Don&apos;t have an account? <a href="#sign-up">Sign up</a></p>
