@@ -5,10 +5,6 @@
 @import "./styles/component-typography.css";
 @import "./styles/component-colors.css";
 
-@source not "../.agents";
-@source not "../.md_file";
-@source not "../.reference";
-
 :root {
     --ink: #292741;
     --muted: #716d91;
