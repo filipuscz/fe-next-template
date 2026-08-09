@@ -17,6 +17,46 @@ Comprehensive skill for creating beautiful, accessible user interfaces combining
 - shadcn/ui: https://ui.shadcn.com/llms.txt
 - Tailwind CSS: https://tailwindcss.com/docs
 
+## YoruSpace Project Rules (Required)
+
+Before changing UI in this repository, read and follow these project sources of truth:
+
+- `.md_file/font.md` for the typography scale, weights, line heights, and readable text measures.
+- `.md_file/ui_ux.md` for the product-wide UX, responsive, accessibility, and token-system rules.
+
+### Developer role and core philosophy
+
+- Act as a Senior Frontend Developer skilled in React, Next.js, and web accessibility (a11y).
+- Prioritize visual comfort as well as accessibility. Never use pure white (`#FFFFFF`) or pure black (`#000000`) as application surfaces or text. Use calm off-white backgrounds with dark-gray text, then verify accessible contrast.
+
+### Language
+
+- Write all generated UI copy in English, including labels, navigation, helper text, validation messages, empty states, documentation, and accessible names, unless the user explicitly requests another language.
+
+### Typography and visual comfort
+
+- Keep body and input text at 16px with a 1.5 line height; use 14px for secondary controls and 12–13px for captions.
+- Use the project heading hierarchy from `font.md`: 600-weight headings, 500–600-weight actions and navigation, and avoid using 700 weight as a default.
+- Keep long-form copy within a 60–75 character measure on desktop and use adaptive mobile gutters.
+- Use semantic tokens for canvas, surfaces, foreground, muted text, borders, focus, accents, and status colors. Do not introduce component-level raw hex values.
+- Avoid pure white and pure black surfaces. Preserve calm off-white and charcoal-violet pairings with verified accessible contrast.
+
+### Select and command patterns
+
+- Use the installed `cmdk` primitives for every custom, searchable, filterable, multi-select, or command-style select option list. Include keyboard navigation, an accessible label, an empty result state, and clear selected-state feedback.
+- A native `<select>` is acceptable only for a simple fixed option list that does not need search, filtering, tags, or custom option content. Do not create bespoke searchable dropdowns in place of `cmdk`.
+
+### File, date, and time inputs
+
+- Use `react-dropzone` for file-upload drop areas. Keep the native file-input fallback available, expose clear accepted-file and size guidance, and make drag-and-drop optional rather than the only upload path.
+- Use `react-day-picker` for date selection and date ranges. Pair it with an accessible text input or trigger, keyboard navigation, localized labels, clear selected states, and validation feedback.
+- Use `react-day-picker` for time-oriented calendar selection when a date-and-time workflow needs a calendar. Provide a separate accessible time control for the time value; do not misuse a free-form date field or force users to enter an ambiguous date/time string.
+
+### Accessibility baseline
+
+- Meet WCAG AA contrast, provide a visible 3px focus ring with an offset, retain color-independent status cues, and keep interactive targets at least 44px.
+- Use semantic HTML, associated form labels, keyboard-operable controls, logical heading order, skip links, and reduced-motion-safe transitions.
+
 ## When to Use This Skill
 
 Use when:
@@ -299,12 +339,12 @@ export function LoginForm() {
 
 **Responsive layout with dark mode:**
 ```tsx
-<div className="min-h-screen bg-white dark:bg-gray-900">
+<div className="min-h-screen bg-[var(--canvas)] text-[var(--foreground)]">
   <div className="container mx-auto px-4 py-8">
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-      <Card className="bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
+      <Card className="bg-[var(--surface)] border-[var(--border)]">
         <CardContent className="p-6">
-          <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
+          <h3 className="text-xl font-semibold text-[var(--foreground)]">
             Content
           </h3>
         </CardContent>

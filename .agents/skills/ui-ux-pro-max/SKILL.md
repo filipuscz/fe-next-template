@@ -8,45 +8,82 @@ Comprehensive design guide for web, mobile, and desktop applications. Contains 6
 
 ## When to Apply
 
-当任务涉及 **UI 结构、视觉设计决策、交互模式或用户体验质量控制** 时，应使用此 Skill。
+Use this skill whenever a task involves **UI structure, visual design decisions, interaction patterns, or user-experience quality control**.
 
 ### Primary Use Cases
 
-在以下情况此 Skill 最为有用：
+This skill is most useful when you need to:
 
-- 设计新的页面（Landing Page、Dashboard、Admin、SaaS、Mobile App）
-- 创建或重构 UI 组件（按钮、弹窗、表单、表格、图表等）
-- 选择配色方案、字体系统、间距规范或布局体系
-- 审查 UI 代码的用户体验、可访问性或视觉一致性
-- 实现导航结构、动效或响应式行为
-- 做产品层级的设计决策（风格、信息层级、品牌表达）
-- 提升界面的感知质量、清晰度或可用性
+- Design new pages (landing pages, dashboards, admin tools, SaaS products, or mobile apps)
+- Create or refactor UI components (buttons, dialogs, forms, tables, or charts)
+- Choose color palettes, typography systems, spacing rules, or layout systems
+- Review UI code for user experience, accessibility, or visual consistency
+- Implement navigation, motion, or responsive behavior
+- Make product-level design decisions (style, information hierarchy, or brand expression)
+- Improve perceived quality, clarity, or usability
 
 ### Recommended
 
-在以下情况建议使用此 Skill：
+Use this skill when:
 
-- UI 看起来"不够专业"，但原因不明确
-- 收到可用性或体验方面的反馈
-- 准备上线前的 UI 质量优化
-- 需要对齐跨平台设计（Web / iOS / Android）
-- 构建设计系统或可复用组件库
+- The UI feels unpolished and the cause is unclear
+- You receive usability or experience feedback
+- You are improving UI quality before release
+- You need cross-platform alignment (web, iOS, or Android)
+- You are building a design system or reusable component library
 
 ### Skip
 
-在以下情况无需使用此 Skill：
+Do not use this skill for:
 
-- 纯后端逻辑开发
-- 仅涉及 API 或数据库设计
-- 与界面无关的性能优化
-- 基础设施或 DevOps 工作
-- 非视觉类脚本或自动化任务
+- Pure backend logic
+- API or database design only
+- Non-visual performance optimization
+- Infrastructure or DevOps work
+- Non-visual scripts or automation
 
-**判断准则**：如果任务会改变某个功能 **看起来如何、使用起来如何、如何运动或如何被交互**，就应该使用此 Skill。
+**Decision rule:** Use this skill when a task changes how a feature **looks, feels, moves, or is interacted with**.
+
+## YoruSpace Project Rules (Required)
+
+### Developer role and core philosophy
+
+- Act as a Senior Frontend Developer skilled in React, Next.js, and web accessibility (a11y).
+- Prioritize visual comfort alongside accessibility. Do not use pure white (`#FFFFFF`) or pure black (`#000000`) as application surfaces or text: their extreme contrast causes harsh screen glare. Use calm off-white backgrounds with dark-gray text and verify accessible contrast.
+
+### Source of truth
+
+Before UI work in this repository, read and apply:
+
+- `.md_file/font.md` for the required typography hierarchy, weights, line heights, and readable text measure.
+- `.md_file/ui_ux.md` for the product-wide responsive, accessibility, visual-comfort, and semantic-token rules.
+
+### English-only product copy
+
+- Write all generated UI copy and supporting documentation in English, including labels, navigation, hints, validation messages, empty states, and accessibility labels, unless the user explicitly requests another language.
+
+### Typography, color, and accessibility
+
+- Apply the `font.md` hierarchy: 16px body and input text, 14px secondary UI, 12–13px captions, 500–600-weight actions, and 600-weight headings.
+- Keep paragraphs within a 60–75 character desktop measure and design mobile-first with adaptive gutters.
+- Use only semantic tokens for canvas, surfaces, text, borders, focus, accents, and statuses. Do not add component-specific raw hex colors.
+- Avoid pure white and pure black; use the project's calm off-white and charcoal-violet surfaces with verified WCAG AA contrast.
+- Provide 44px minimum targets, a visible 3px focus ring with offset, keyboard support, semantic structure, associated field labels, color-independent status cues, and reduced-motion-safe transitions.
+
+### Select options must use cmdk
+
+- Build every custom, searchable, filterable, multi-select, or command-style select option list with the installed `cmdk` primitives. Include keyboard navigation, an accessible label, an empty state, and an explicit selected state.
+- Use a native `<select>` only for a simple fixed option list that does not need search, filtering, tags, or custom option content. Never replace a searchable select with a bespoke dropdown.
+
+### File, date, and time inputs
+
+- Use `react-dropzone` for file-upload drop areas, retaining a native file-input fallback and clearly communicating accepted files, size limits, upload status, and errors.
+- Use `react-day-picker` for accessible date and date-range selection. Pair it with a labelled input or trigger, keyboard navigation, clear selected states, and validation feedback.
+- For date-and-time workflows, use `react-day-picker` for the calendar portion and a separate accessible time control for time values. Do not rely on ambiguous free-form date/time entry.
 
 ## Rule Categories by Priority
 
-*供人工/AI 查阅：按 1→10 决定先关注哪类规则；需要细则时用 `--domain <Domain>` 查询。脚本不读取本表。*
+*Reference for people and AI: use priorities 1–10 to decide which rules to inspect first; use `--domain <Domain>` for details. The script does not read this table.*
 
 | Priority | Category | Impact | Domain | Key Checks (Must Have) | Anti-Patterns (Avoid) |
 |----------|----------|--------|--------|------------------------|------------------------|
@@ -325,15 +362,15 @@ Use this skill when the user requests any of the following:
 
 | Scenario | Trigger Examples | Start From |
 |----------|-----------------|------------|
-| **New project / page** | "做一个 landing page"、"Build a dashboard" | Step 1 → Step 2 (design system) |
-| **New component** | "Create a pricing card"、"Add a modal" | Step 3 (domain search: style, ux) |
-| **Choose style / color / font** | "What style fits a fintech app?"、"推荐配色" | Step 2 (design system) |
-| **Review existing UI** | "Review this page for UX issues"、"检查无障碍" | Quick Reference checklist above |
-| **Fix a UI bug** | "Button hover is broken"、"Layout shifts on load" | Quick Reference → relevant section |
-| **Improve / optimize** | "Make this faster"、"Improve mobile experience" | Step 3 (domain search: ux, react) |
+| **New project / page** | "Create a landing page", "Build a dashboard" | Step 1 → Step 2 (design system) |
+| **New component** | "Create a pricing card", "Add a modal" | Step 3 (domain search: style, ux) |
+| **Choose style / color / font** | "What style fits a fintech app?", "Recommend a color palette" | Step 2 (design system) |
+| **Review existing UI** | "Review this page for UX issues", "Audit accessibility" | Quick Reference checklist above |
+| **Fix a UI bug** | "Button hover is broken", "Layout shifts on load" | Quick Reference → relevant section |
+| **Improve / optimize** | "Make this faster", "Improve mobile experience" | Step 3 (domain search: ux, react) |
 | **Implement dark mode** | "Add dark mode support" | Step 3 (domain: style "dark mode") |
-| **Add charts / data viz** | "Add an analytics dashboard chart" | Step 3 (domain: chart) |
-| **Stack best practices** | "React performance tips"、"SwiftUI navigation" | Step 4 (stack search) |
+| **Add charts / data visualization** | "Add an analytics dashboard chart" | Step 3 (domain: chart) |
+| **Stack best practices** | "React performance tips", "SwiftUI navigation" | Step 4 (stack search) |
 
 Follow this workflow:
 
@@ -495,7 +532,7 @@ python3 skills/ui-ux-pro-max/scripts/search.py "enterprise tableview density per
 
 ## Example Workflow
 
-**User request:** "Make an AI search homepage。"
+**User request:** "Make an AI search homepage."
 
 ### Step 1: Analyze Requirements
 - Product type: Tool (AI search engine)
@@ -584,10 +621,10 @@ Scope notice: The rules below are for App UI (iOS/Android/React Native/Flutter),
 
 ### Icons & Visual Elements
 
-- 默认图标库使用 **Phosphor (`@phosphor-icons/react`)**。`src/ui-ux-pro-max/data/icons.csv` 中列出的只是常用推荐图标，不是完整集合。
-- 当推荐表中找不到合适的图标时：
-  - **优先继续从 Phosphor 的完整图标集中选择任何语义更贴切的图标**；
-  - 如果 Phosphor 也没有理想选项，可以使用 **Heroicons (`@heroicons/react`)** 作为备选，注意保持风格一致（线性/填充、笔画粗细、圆角风格）。
+- Use **Phosphor (`@phosphor-icons/react`)** as the default icon library. The entries in `src/ui-ux-pro-max/data/icons.csv` are common recommendations, not the complete set.
+- When the recommendation table does not contain a suitable icon:
+  - **First, choose any more semantically appropriate icon from the full Phosphor collection**.
+  - If Phosphor has no suitable option, use **Heroicons (`@heroicons/react`)** as a fallback while keeping the visual style consistent (outline/filled treatment, stroke weight, and corner style).
 
 | Rule | Standard | Avoid | Why It Matters |
 |------|----------|--------|----------------|

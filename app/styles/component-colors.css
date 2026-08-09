@@ -512,7 +512,7 @@ html body .dashboard-yoru .forms-search { display: flex; align-items: center; ga
 html body .dashboard-yoru .forms-search svg { width: 1rem; color: var(--color-muted); }
 html body .dashboard-yoru .forms-search .forms-input { border: 0; }
 html body .dashboard-yoru .forms-tags { display: flex; flex-wrap: wrap; gap: .5rem; min-height: 44px; margin-bottom: .75rem; }
-html body .dashboard-yoru .forms-tags button { min-height: 32px; padding: 0 .625rem; border: 1px solid var(--color-primary-border); border-radius: 999px; color: var(--color-primary); background: var(--color-primary-subtle); cursor: pointer; font: inherit; font-size: .8125rem; }
+html body .dashboard-yoru .forms-tags button { min-height: 44px; padding: 0 .625rem; border: 1px solid var(--color-primary-border); border-radius: 999px; color: var(--color-primary); background: var(--color-primary-subtle); cursor: pointer; font: inherit; font-size: .8125rem; }
 html body .dashboard-yoru .forms-choice-list { display: grid; gap: .5rem; }
 html body .dashboard-yoru .forms-command { overflow: hidden; border: 1px solid var(--color-border); border-radius: .875rem; background: var(--color-surface-raised); }
 html body .dashboard-yoru .forms-command-input { display: flex; align-items: center; gap: .5rem; padding: 0 .75rem; border-bottom: 1px solid var(--color-border); }
@@ -520,8 +520,9 @@ html body .dashboard-yoru .forms-command-input svg { width: 1rem; color: var(--c
 html body .dashboard-yoru .forms-command-input input { width: 100%; min-height: 44px; border: 0; outline: 0; color: var(--color-foreground); background: transparent; font: inherit; font-size: 1rem; }
 html body .dashboard-yoru .forms-command [cmdk-list] { max-height: 160px; overflow-y: auto; padding: .375rem; }
 html body .dashboard-yoru .forms-command [cmdk-group-heading] { padding: .375rem .5rem; color: var(--color-muted); font-size: .6875rem; font-weight: 600; text-transform: uppercase; }
-html body .dashboard-yoru .forms-command [cmdk-item] { min-height: 40px; display: flex; align-items: center; justify-content: space-between; gap: .75rem; padding: 0 .625rem; border-radius: .5rem; color: var(--color-foreground); cursor: pointer; font-size: .875rem; }
+html body .dashboard-yoru .forms-command [cmdk-item] { min-height: 44px; display: flex; align-items: center; justify-content: space-between; gap: .75rem; padding: 0 .625rem; border-radius: .5rem; color: var(--color-foreground); cursor: pointer; font-size: .875rem; }
 html body .dashboard-yoru .forms-command [cmdk-item][data-selected="true"] { color: var(--color-primary); background: var(--color-primary-subtle); }
+html body .dashboard-yoru .forms-command [cmdk-item][aria-selected="true"] { color: var(--color-primary); background: color-mix(in srgb, var(--color-primary-subtle) 72%, var(--color-surface-raised)); }
 html body .dashboard-yoru .forms-command [cmdk-item] svg { width: 1rem; }
 html body .dashboard-yoru .forms-command [cmdk-empty] { padding: .75rem; color: var(--color-muted); font-size: .8125rem; text-align: center; }
 html body .dashboard-yoru .forms-editor { overflow: hidden; border: 1px solid var(--color-border); border-radius: .875rem; background: var(--color-surface-raised); }
@@ -552,6 +553,568 @@ html body .dashboard-yoru .forms-steps .is-current, html body .dashboard-yoru .f
 html body .dashboard-yoru .forms-steps .is-current span, html body .dashboard-yoru .forms-steps .is-complete span { border-color: var(--color-primary); color: var(--color-primary-foreground); background: var(--color-primary); }
 @media (max-width: 760px) { html body .dashboard-yoru .forms-showcase-grid { grid-template-columns: 1fr; } html body .dashboard-yoru .forms-grid-form { grid-template-columns: 1fr; } html body .dashboard-yoru .forms-grid-form .forms-form-actions { grid-column: auto; } html body .dashboard-yoru .forms-input-group--wrap > .forms-input { flex: 1 1 150px; } }
 @media (max-width: 420px) { html body .dashboard-yoru .forms-showcase-heading { gap: .625rem; } html body .dashboard-yoru .forms-showcase-heading > span { font-size: .6875rem; } html body .dashboard-yoru .forms-steps { gap: .375rem; } html body .dashboard-yoru .forms-steps li { font-size: .6875rem; } }
+
+/* Form controls: calm surfaces, readable text, and one consistent interaction contract. */
+html body .dashboard-yoru :is(.forms-showcase, .forms-hub) {
+  --forms-control-surface: var(--color-surface);
+  --forms-control-border: var(--color-border);
+  --forms-control-ink: var(--color-foreground);
+  --forms-control-placeholder: var(--color-muted);
+}
+
+html body .dashboard-yoru :is(.forms-showcase, .forms-hub) .forms-input {
+  min-height: 44px;
+  padding: .625rem .875rem;
+  border: 1px solid var(--forms-control-border);
+  border-radius: .5rem;
+  color: var(--forms-control-ink);
+  background: var(--forms-control-surface);
+  box-shadow: inset 0 1px 2px color-mix(in srgb, var(--color-foreground) 5%, transparent);
+  font-size: 1rem;
+  font-weight: 500;
+  letter-spacing: -.005em;
+  line-height: 1.4;
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast), background var(--transition-fast);
+}
+
+html body .dashboard-yoru :is(.forms-showcase, .forms-hub) .forms-input::placeholder,
+html body .dashboard-yoru :is(.forms-showcase, .forms-hub) .forms-command-input input::placeholder {
+  color: var(--forms-control-placeholder);
+  opacity: 1;
+  font-weight: 400;
+}
+
+html body .dashboard-yoru :is(.forms-showcase, .forms-hub) .forms-input:focus-visible,
+html body .dashboard-yoru :is(.forms-showcase, .forms-hub) .forms-command-input input:focus-visible {
+  outline: 0;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-focus) 34%, transparent), inset 0 1px 2px color-mix(in srgb, var(--color-foreground) 5%, transparent);
+}
+
+html body .dashboard-yoru :is(.forms-showcase, .forms-hub) .forms-input:hover:not(:disabled):not(:focus-visible),
+html body .dashboard-yoru :is(.forms-showcase, .forms-hub) .forms-command-input input:hover:not(:focus-visible) {
+  border-color: color-mix(in srgb, var(--color-primary-border) 72%, var(--forms-control-border));
+}
+
+html body .dashboard-yoru :is(.forms-showcase, .forms-hub) .forms-input:disabled {
+  color: var(--color-subtle);
+  background: color-mix(in srgb, var(--color-muted) 8%, var(--forms-control-surface));
+  box-shadow: none;
+  cursor: not-allowed;
+}
+
+html body .dashboard-yoru :is(.forms-showcase, .forms-hub) .forms-input[readonly] {
+  background: color-mix(in srgb, var(--color-primary-subtle) 34%, var(--forms-control-surface));
+}
+
+html body .dashboard-yoru :is(.forms-showcase, .forms-hub) .forms-input[aria-invalid="true"] {
+  border-color: var(--color-danger);
+  box-shadow: inset 0 1px 2px color-mix(in srgb, var(--color-danger) 8%, transparent);
+}
+
+/* Input groups keep their addons connected even after the standalone input
+   treatment above; only the wrap variant is allowed to break onto new rows. */
+html body .dashboard-yoru main.component-showcase.forms-showcase .forms-input-group .forms-input.forms-input,
+html body .dashboard-yoru .forms-hub .forms-input-group .forms-input.forms-input {
+  width: auto;
+  min-width: 0;
+  flex: 1 1 220px;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+html body .dashboard-yoru main.component-showcase.forms-showcase .forms-input-group--wrap .forms-input.forms-input,
+html body .dashboard-yoru .forms-hub .forms-input-group--wrap .forms-input.forms-input {
+  min-width: 12rem;
+  flex-basis: 12rem;
+}
+
+html body .dashboard-yoru main.component-showcase.forms-showcase .forms-input-group .button-yoru,
+html body .dashboard-yoru .forms-hub .forms-input-group .button-yoru {
+  flex: 0 0 auto;
+  white-space: nowrap;
+}
+
+html body .dashboard-yoru main.component-showcase.forms-showcase .forms-input-group-feedback,
+html body .dashboard-yoru .forms-hub .forms-input-group-feedback {
+  margin: .5rem 0 0;
+  color: var(--color-muted);
+  font-size: .75rem;
+  line-height: 1.45;
+}
+
+html body .dashboard-yoru main.component-showcase.forms-showcase .forms-input-group-results,
+html body .dashboard-yoru .forms-hub .forms-input-group-results {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .375rem;
+  padding: 0;
+  margin: .625rem 0 0;
+  list-style: none;
+}
+
+html body .dashboard-yoru main.component-showcase.forms-showcase .forms-input-group-results li,
+html body .dashboard-yoru .forms-hub .forms-input-group-results li {
+  padding: .3125rem .625rem;
+  border: 1px solid var(--color-primary-border);
+  border-radius: 999px;
+  color: var(--color-primary);
+  background: var(--color-primary-subtle);
+  font-size: .75rem;
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+html body .dashboard-yoru main.component-showcase.forms-showcase .forms-accent-color-control {
+  position: relative;
+  width: 100%;
+  min-height: 44px;
+  overflow: hidden;
+  border: 1px solid var(--color-primary-border);
+  border-radius: .5rem;
+  background: var(--color-primary);
+  box-shadow: inset 0 1px 2px color-mix(in srgb, var(--color-foreground) 12%, transparent);
+}
+
+html body .dashboard-yoru main.component-showcase.forms-showcase .forms-accent-color-preview {
+  position: absolute;
+  inset: .25rem;
+  border-radius: .25rem;
+  background: linear-gradient(135deg, color-mix(in srgb, #fff 24%, var(--color-primary)), var(--color-primary));
+  pointer-events: none;
+}
+
+html body .dashboard-yoru main.component-showcase.forms-showcase .forms-accent-color-control .forms-input.forms-accent-color {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  min-height: 44px;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+html body .dashboard-yoru main.component-showcase.forms-showcase .forms-accent-color-control:has(.forms-accent-color:focus-visible) {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-focus) 34%, transparent), inset 0 1px 2px color-mix(in srgb, var(--color-foreground) 12%, transparent);
+}
+
+html body .dashboard-yoru main.component-showcase.forms-showcase .forms-command-select {
+  position: relative;
+  width: 100%;
+  z-index: 1;
+}
+
+html body .dashboard-yoru main.component-showcase.forms-showcase .forms-command-select:has(.forms-command-select-trigger[aria-expanded="true"]),
+html body .dashboard-yoru main.component-showcase.forms-showcase .forms-showcase-card:has(.forms-command-select-trigger[aria-expanded="true"]) {
+  z-index: 40;
+}
+
+html body .dashboard-yoru main.component-showcase.forms-showcase .forms-command-select-trigger {
+  width: 100%;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: .75rem;
+  padding: .625rem .875rem;
+  border: 1px solid var(--forms-control-border);
+  border-radius: .5rem;
+  color: var(--forms-control-ink);
+  background: var(--forms-control-surface);
+  box-shadow: inset 0 1px 2px color-mix(in srgb, var(--color-foreground) 5%, transparent);
+  cursor: pointer;
+  font: inherit;
+  font-size: .9375rem;
+  font-weight: 500;
+  line-height: 1.4;
+  text-align: left;
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast), background var(--transition-fast);
+}
+
+html body .dashboard-yoru main.component-showcase.forms-showcase .forms-command-select-trigger > span {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+html body .dashboard-yoru main.component-showcase.forms-showcase .forms-command-select-trigger > svg {
+  width: 1rem;
+  flex: none;
+  color: var(--color-muted);
+}
+
+html body .dashboard-yoru main.component-showcase.forms-showcase .forms-command-select-trigger:hover:not(:disabled),
+html body .dashboard-yoru main.component-showcase.forms-showcase .forms-command-select-trigger[aria-expanded="true"] {
+  border-color: var(--color-primary-border);
+  background: color-mix(in srgb, var(--color-primary-subtle) 34%, var(--forms-control-surface));
+}
+
+html body .dashboard-yoru main.component-showcase.forms-showcase .forms-command-select-trigger:focus-visible {
+  outline: 0;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-focus) 34%, transparent), inset 0 1px 2px color-mix(in srgb, var(--color-foreground) 5%, transparent);
+}
+
+html body .dashboard-yoru main.component-showcase.forms-showcase .forms-command-select-trigger:disabled {
+  color: var(--color-subtle);
+  background: color-mix(in srgb, var(--color-muted) 8%, var(--forms-control-surface));
+  cursor: not-allowed;
+}
+
+html body .dashboard-yoru main.component-showcase.forms-showcase .forms-command-select--lg .forms-command-select-trigger {
+  min-height: 52px;
+  font-size: 1rem;
+}
+
+html body .dashboard-yoru main.component-showcase.forms-showcase .forms-command-select--sm .forms-command-select-trigger {
+  min-height: 44px;
+  padding-block: .5rem;
+  font-size: .875rem;
+}
+
+html body .dashboard-yoru main.component-showcase.forms-showcase .forms-command-select-menu {
+  position: absolute;
+  z-index: 20;
+  top: calc(100% + .5rem);
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  max-height: min(22rem, calc(100vh - 2rem));
+  border: 1px solid var(--color-border);
+  border-radius: .75rem;
+  background: var(--color-surface);
+  box-shadow: 0 16px 32px color-mix(in srgb, var(--color-foreground) 18%, transparent);
+}
+
+html body .dashboard-yoru main.component-showcase.forms-showcase .forms-command-select-menu .forms-command {
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+html body .dashboard-yoru main.component-showcase.forms-showcase .forms-command-select-menu [cmdk-root] {
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+html body .dashboard-yoru main.component-showcase.forms-showcase .forms-command-select-menu .forms-command-input {
+  border-bottom-color: var(--color-border);
+}
+
+html body .dashboard-yoru main.component-showcase.forms-showcase .forms-command-select-menu [cmdk-list] {
+  min-height: 0;
+  max-height: 13rem;
+  overflow-y: auto;
+  padding: .375rem;
+  scroll-padding-block: .5rem;
+}
+
+html body .dashboard-yoru main.component-showcase.forms-showcase .forms-command-select-menu [cmdk-group-heading] {
+  padding: .375rem .5rem;
+  color: var(--color-muted);
+  font-size: .6875rem;
+  font-weight: 600;
+  line-height: 1.3;
+  text-transform: uppercase;
+}
+
+html body .dashboard-yoru main.component-showcase.forms-showcase .forms-command-select-menu [cmdk-item] {
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: .75rem;
+  padding: 0 .625rem;
+  border-radius: .5rem;
+  color: var(--color-foreground);
+  cursor: pointer;
+  font-size: .9375rem;
+  line-height: 1.35;
+}
+
+html body .dashboard-yoru main.component-showcase.forms-showcase .forms-command-select-menu [cmdk-item][data-selected="true"] {
+  color: var(--color-primary);
+  background: var(--color-primary-subtle);
+}
+
+html body .dashboard-yoru main.component-showcase.forms-showcase .forms-command-select-menu [cmdk-item][aria-selected="true"] {
+  color: var(--color-primary);
+  background: color-mix(in srgb, var(--color-primary-subtle) 72%, var(--color-surface));
+}
+
+html body .dashboard-yoru main.component-showcase.forms-showcase .forms-command-select-menu [cmdk-item] > svg {
+  width: 1rem;
+  flex: none;
+}
+
+html body .dashboard-yoru main.component-showcase.forms-showcase .forms-command-select-menu [cmdk-empty] {
+  padding: .75rem;
+  color: var(--color-muted);
+  font-size: .8125rem;
+  text-align: center;
+}
+
+html body .dashboard-yoru main.component-showcase.forms-showcase .forms-command-select--invalid .forms-command-select-trigger,
+html body .dashboard-yoru main.component-showcase.forms-showcase .forms-input-group--invalid {
+  border-color: var(--color-danger);
+}
+
+html body .dashboard-yoru main.component-showcase.forms-showcase .forms-command-select--invalid .forms-command-select-trigger:focus-visible {
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-danger) 32%, transparent), inset 0 1px 2px color-mix(in srgb, var(--color-foreground) 5%, transparent);
+}
+
+html body .dashboard-yoru main.component-showcase.forms-showcase .forms-floating {
+  position: relative;
+  display: block;
+  padding-top: .375rem;
+}
+
+html body .dashboard-yoru main.component-showcase.forms-showcase .forms-floating > span {
+  position: absolute;
+  z-index: 1;
+  top: 1rem;
+  left: .875rem;
+  padding: 0 .25rem;
+  color: var(--color-muted);
+  background: var(--forms-control-surface);
+  font-size: .875rem;
+  line-height: 1;
+  pointer-events: none;
+  transform: translateY(-50%);
+  transition: top var(--transition-fast), transform var(--transition-fast), color var(--transition-fast), font-size var(--transition-fast);
+}
+
+html body .dashboard-yoru main.component-showcase.forms-showcase .forms-floating:has(textarea) > span {
+  top: 1.25rem;
+  transform: none;
+}
+
+html body .dashboard-yoru main.component-showcase.forms-showcase .forms-floating .forms-input:focus + span,
+html body .dashboard-yoru main.component-showcase.forms-showcase .forms-floating .forms-input:not(:placeholder-shown) + span {
+  top: .375rem;
+  color: var(--color-primary);
+  font-size: .75rem;
+  font-weight: 600;
+  transform: translateY(-50%);
+}
+
+html body .dashboard-yoru main.component-showcase.forms-showcase .forms-floating:has(textarea) .forms-input:focus + span,
+html body .dashboard-yoru main.component-showcase.forms-showcase .forms-floating:has(textarea) .forms-input:not(:placeholder-shown) + span {
+  top: .375rem;
+}
+
+html body .dashboard-yoru :is(.forms-showcase, .forms-hub) .forms-input--lg {
+  min-height: 52px;
+  font-size: 1rem;
+}
+
+html body .dashboard-yoru :is(.forms-showcase, .forms-hub) .forms-input--sm {
+  min-height: 36px;
+  padding-block: .375rem;
+  font-size: .8125rem;
+}
+
+html body .dashboard-yoru :is(.forms-showcase, .forms-hub) textarea.forms-input,
+html body .dashboard-yoru :is(.forms-showcase, .forms-hub) .forms-editor textarea {
+  min-height: 104px;
+  padding-top: .75rem;
+  resize: vertical;
+}
+
+html body .dashboard-yoru :is(.forms-showcase, .forms-hub) .forms-editor textarea {
+  min-height: 160px;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+html body .dashboard-yoru :is(.forms-showcase, .forms-hub) .forms-input[type="color"] {
+  min-height: 44px;
+  padding: .25rem;
+  cursor: pointer;
+}
+
+html body .dashboard-yoru :is(.forms-showcase, .forms-hub) .forms-input[type="file"] {
+  min-height: 48px;
+  padding: .375rem;
+  cursor: pointer;
+}
+
+html body .dashboard-yoru :is(.forms-showcase, .forms-hub) .forms-input[type="file"]::file-selector-button {
+  min-height: 34px;
+  margin-right: .625rem;
+  padding: 0 .75rem;
+  border: 1px solid var(--color-primary-border);
+  border-radius: .375rem;
+  color: var(--color-primary);
+  background: var(--color-primary-subtle);
+  cursor: pointer;
+  font: inherit;
+  font-size: .8125rem;
+  font-weight: 600;
+}
+
+html body .dashboard-yoru :is(.forms-showcase, .forms-hub) .forms-input[type="file"]:hover::file-selector-button {
+  border-color: var(--color-primary);
+  background: color-mix(in srgb, var(--color-primary-subtle) 72%, var(--forms-control-surface));
+}
+
+html body .dashboard-yoru :is(.forms-showcase, .forms-hub) :is(.forms-check-list, .forms-choice-list, .forms-input-group) input:is([type="checkbox"], [type="radio"]) {
+  width: 1.125rem;
+  height: 1.125rem;
+  flex: none;
+  margin: 0;
+  appearance: none;
+  border: 1px solid var(--forms-control-border);
+  border-radius: .35rem;
+  accent-color: var(--color-primary);
+  background: var(--forms-control-surface);
+  cursor: pointer;
+}
+
+html body .dashboard-yoru :is(.forms-showcase, .forms-hub) :is(.forms-check-list, .forms-choice-list, .forms-input-group) input[type="radio"] {
+  border-radius: 50%;
+}
+
+html body .dashboard-yoru :is(.forms-showcase, .forms-hub) :is(.forms-check-list, .forms-choice-list, .forms-input-group) input[type="checkbox"]:checked {
+  border-color: var(--color-primary);
+  background-color: var(--color-primary);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='m3.2 8.2 3 3 6.6-6.5' fill='none' stroke='%23fffdf8' stroke-linecap='round' stroke-linejoin='round' stroke-width='2.1'/%3E%3C/svg%3E");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: .8rem .8rem;
+}
+
+html body .dashboard-yoru :is(.forms-showcase, .forms-hub) :is(.forms-check-list, .forms-choice-list, .forms-input-group) input[type="radio"]:checked {
+  border-color: var(--color-primary);
+  background: radial-gradient(circle, var(--color-primary-foreground) 0 32%, var(--color-primary) 35% 100%);
+}
+
+html body .dashboard-yoru :is(.forms-showcase, .forms-hub) :is(.forms-check-list, .forms-choice-list, .forms-input-group) input:is([type="checkbox"], [type="radio"]):focus-visible {
+  outline: 0;
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-focus) 34%, transparent);
+}
+
+html body .dashboard-yoru :is(.forms-showcase, .forms-hub) .forms-range {
+  width: 100%;
+  height: 1.25rem;
+  appearance: none;
+  accent-color: var(--color-primary);
+  background: transparent;
+  cursor: pointer;
+}
+
+html body .dashboard-yoru :is(.forms-showcase, .forms-hub) .forms-range::-webkit-slider-runnable-track {
+  height: .375rem;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--color-primary) 18%, var(--color-border));
+}
+
+html body .dashboard-yoru :is(.forms-showcase, .forms-hub) .forms-range::-webkit-slider-thumb {
+  width: 1.125rem;
+  height: 1.125rem;
+  margin-top: -.375rem;
+  appearance: none;
+  border: 3px solid var(--forms-control-surface);
+  border-radius: 50%;
+  background: var(--color-primary);
+  box-shadow: 0 1px 4px color-mix(in srgb, var(--color-foreground) 20%, transparent);
+}
+
+html body .dashboard-yoru :is(.forms-showcase, .forms-hub) .forms-range::-moz-range-track {
+  height: .375rem;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--color-primary) 18%, var(--color-border));
+}
+
+html body .dashboard-yoru :is(.forms-showcase, .forms-hub) .forms-range::-moz-range-thumb {
+  width: .75rem;
+  height: .75rem;
+  border: 3px solid var(--forms-control-surface);
+  border-radius: 50%;
+  background: var(--color-primary);
+  box-shadow: 0 1px 4px color-mix(in srgb, var(--color-foreground) 20%, transparent);
+}
+
+html body .dashboard-yoru :is(.forms-showcase, .forms-hub) .forms-range:focus-visible {
+  outline: 3px solid var(--color-focus);
+  outline-offset: 3px;
+}
+
+html body .dashboard-yoru :is(.forms-showcase, .forms-hub) .forms-command-input input {
+  min-height: 44px;
+  color: var(--forms-control-ink);
+  background: transparent;
+  font-size: .9375rem;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+html body .dashboard-yoru :is(.forms-showcase, .forms-hub) .forms-inline-editor {
+  color: var(--forms-control-ink);
+  font-size: .9375rem;
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+/* The showcase typography contract has a broad :is() selector; duplicate the
+   control class here so input text keeps this control-specific scale. */
+html body .dashboard-yoru main.component-showcase.forms-showcase .forms-input.forms-input,
+html body .dashboard-yoru .forms-hub .forms-input.forms-input,
+html body .dashboard-yoru main.component-showcase.forms-showcase .forms-command-input input,
+html body .dashboard-yoru .forms-hub .forms-command-input input {
+  font-size: .9375rem;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+html body .dashboard-yoru main.component-showcase.forms-showcase .forms-input.forms-input--lg,
+html body .dashboard-yoru .forms-hub .forms-input.forms-input--lg {
+  font-size: 1rem;
+}
+
+html body .dashboard-yoru main.component-showcase.forms-showcase .forms-input.forms-input--sm,
+html body .dashboard-yoru .forms-hub .forms-input.forms-input--sm {
+  font-size: .8125rem;
+}
+
+html body .dashboard-yoru main.component-showcase.forms-showcase .forms-showcase-heading h2 {
+  font-size: clamp(1.125rem, 1.8vw, 1.35rem);
+  font-weight: 600;
+  letter-spacing: -.025em;
+  line-height: 1.2;
+}
+
+html body .dashboard-yoru main.component-showcase.forms-showcase .forms-editor textarea {
+  color: var(--forms-control-ink);
+  background: var(--forms-control-surface);
+  font-size: .9375rem;
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+html body .dashboard-yoru main.component-showcase.forms-showcase .forms-input.forms-input:focus-visible,
+html body .dashboard-yoru .forms-hub .forms-input.forms-input:focus-visible,
+html body .dashboard-yoru main.component-showcase.forms-showcase .forms-command-input input:focus-visible,
+html body .dashboard-yoru .forms-hub .forms-command-input input:focus-visible {
+  outline: 0;
+  outline-offset: 0;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-focus) 34%, transparent), inset 0 1px 2px color-mix(in srgb, var(--color-foreground) 5%, transparent);
+}
+
+html body .dashboard-yoru.theme-dark :is(.forms-showcase, .forms-hub) .forms-input,
+html body .dashboard-yoru.theme-dark :is(.forms-showcase, .forms-hub) .forms-command-input input {
+  color-scheme: dark;
+}
 
 /* Forms parent workbench */
 html body .dashboard-yoru .forms-hub-grid { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(300px, .9fr); gap: 1rem; align-items: start; }
@@ -593,3 +1156,852 @@ html body .dashboard-yoru .forms-hub-links span { display: grid; gap: .125rem; }
 html body .dashboard-yoru .forms-hub-links b { font-size: .875rem; font-weight: 600; }
 html body .dashboard-yoru .forms-hub-links small { color: var(--color-muted); font-size: .75rem; line-height: 1.35; }
 @media (max-width: 900px) { html body .dashboard-yoru .forms-hub-grid { grid-template-columns: 1fr; } }
+
+/* Validation and wizard patterns mirror Phoenix's clear field feedback while
+   keeping every surface, state, and focus treatment on YoruSpace tokens. */
+html body .dashboard-yoru main.component-showcase.forms-showcase .forms-validation-form,
+html body .dashboard-yoru main.component-showcase.forms-showcase .forms-validation-simple-form,
+html body .dashboard-yoru main.component-showcase.forms-showcase .forms-wizard-form {
+  display: grid;
+  gap: 1rem;
+}
+
+html body .dashboard-yoru main.component-showcase.forms-showcase .forms-showcase-card--wide {
+  grid-column: 1 / -1;
+}
+
+html body .dashboard-yoru main.component-showcase.forms-showcase .forms-validation-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+html body .dashboard-yoru main.component-showcase.forms-showcase .forms-validation-form .forms-field,
+html body .dashboard-yoru main.component-showcase.forms-showcase .forms-validation-simple-form .forms-field,
+html body .dashboard-yoru main.component-showcase.forms-showcase .forms-wizard-form .forms-field {
+  align-content: start;
+}
+
+html body .dashboard-yoru main.component-showcase.forms-showcase .forms-validation-simple-form > .btn-yoru {
+  justify-self: start;
+}
+
+html body .dashboard-yoru main.component-showcase.forms-showcase .forms-validation-check {
+  display: inline-flex;
+  align-items: flex-start;
+  gap: .5rem;
+  min-height: 44px;
+  color: var(--color-foreground);
+  cursor: pointer;
+  font-size: .875rem;
+  line-height: 1.5;
+}
+
+html body .dashboard-yoru main.component-showcase.forms-showcase .forms-validation-check input {
+  width: 1.125rem;
+  height: 1.125rem;
+  margin-top: .125rem;
+  accent-color: var(--color-primary);
+  flex: none;
+}
+
+html body .dashboard-yoru main.component-showcase.forms-showcase .forms-validation-check input:focus-visible {
+  outline: 3px solid var(--color-focus);
+  outline-offset: 2px;
+}
+
+html body .dashboard-yoru main.component-showcase.forms-showcase .forms-validation-actions,
+html body .dashboard-yoru main.component-showcase.forms-showcase .forms-wizard-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: .75rem;
+  flex-wrap: wrap;
+}
+
+html body .dashboard-yoru main.component-showcase.forms-showcase .forms-validation-actions .forms-success {
+  margin: 0;
+}
+
+html body .dashboard-yoru main.component-showcase.forms-showcase .forms-validation-tooltip {
+  position: relative;
+}
+
+html body .dashboard-yoru main.component-showcase.forms-showcase .forms-validation-tooltip > .forms-field > .forms-error {
+  display: block;
+  margin-top: .25rem;
+}
+
+html body .dashboard-yoru main.component-showcase.forms-showcase .forms-wizard-card {
+  min-width: 0;
+  overflow: visible;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-card);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-card);
+}
+
+html body .dashboard-yoru main.component-showcase.forms-showcase .forms-wizard-header {
+  padding: 1rem clamp(1rem, 3vw, 1.5rem) .875rem;
+  border-bottom: 1px solid var(--color-border);
+  border-radius: var(--radius-card) var(--radius-card) 0 0;
+  background: color-mix(in srgb, var(--color-primary-subtle) 30%, var(--color-surface));
+}
+
+html body .dashboard-yoru main.component-showcase.forms-showcase .forms-wizard-steps {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: .75rem;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+html body .dashboard-yoru main.component-showcase.forms-showcase .forms-wizard-steps li {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  gap: .5rem;
+  min-width: 0;
+  color: var(--color-muted);
+  font-size: .8125rem;
+  font-weight: 500;
+}
+
+html body .dashboard-yoru main.component-showcase.forms-showcase .forms-wizard-steps li.is-current,
+html body .dashboard-yoru main.component-showcase.forms-showcase .forms-wizard-steps li.is-complete {
+  color: var(--color-primary);
+}
+
+html body .dashboard-yoru main.component-showcase.forms-showcase .forms-wizard-step-number {
+  display: grid;
+  place-items: center;
+  width: 2rem;
+  height: 2rem;
+  border: 1px solid var(--color-border);
+  border-radius: 50%;
+  color: var(--color-muted);
+  background: var(--color-surface-raised);
+  font-size: .75rem;
+  font-weight: 600;
+}
+
+html body .dashboard-yoru main.component-showcase.forms-showcase .forms-wizard-step-number svg {
+  width: 1rem;
+}
+
+html body .dashboard-yoru main.component-showcase.forms-showcase .forms-wizard-steps li.is-current .forms-wizard-step-number,
+html body .dashboard-yoru main.component-showcase.forms-showcase .forms-wizard-steps li.is-complete .forms-wizard-step-number {
+  border-color: var(--color-primary);
+  color: var(--color-primary-foreground);
+  background: var(--color-primary);
+}
+
+html body .dashboard-yoru main.component-showcase.forms-showcase .forms-wizard-body {
+  min-height: 280px;
+  padding: clamp(1rem, 3vw, 1.5rem);
+}
+
+html body .dashboard-yoru main.component-showcase.forms-showcase .forms-wizard-card:has(.forms-command-select-trigger[aria-expanded="true"]) .forms-wizard-body {
+  padding-bottom: 4.5rem;
+}
+
+html body .dashboard-yoru main.component-showcase.forms-showcase .forms-wizard-terms {
+  grid-column: 1 / -1;
+}
+
+html body .dashboard-yoru main.component-showcase.forms-showcase .forms-wizard-upload {
+  display: grid;
+  align-content: start;
+  gap: .5rem;
+  grid-column: 1 / -1;
+  padding: .875rem;
+  border: 1px dashed var(--color-primary-border);
+  border-radius: .75rem;
+  color: var(--color-muted);
+  background: color-mix(in srgb, var(--color-primary-subtle) 30%, var(--color-surface));
+  font-size: .8125rem;
+}
+
+html body .dashboard-yoru main.component-showcase.forms-showcase .forms-wizard-upload .forms-input[type="file"] {
+  min-height: 44px;
+}
+
+html body .dashboard-yoru main.component-showcase.forms-showcase .forms-wizard-footer {
+  padding: .875rem clamp(1rem, 3vw, 1.5rem);
+  border-top: 1px solid var(--color-border);
+  border-radius: 0 0 var(--radius-card) var(--radius-card);
+  background: var(--color-surface-raised);
+}
+
+html body .dashboard-yoru main.component-showcase.forms-showcase .forms-wizard-complete {
+  display: grid;
+  justify-items: center;
+  gap: .75rem;
+  min-height: 240px;
+  align-content: center;
+  color: var(--color-foreground);
+  text-align: center;
+}
+
+html body .dashboard-yoru main.component-showcase.forms-showcase .forms-wizard-complete > svg {
+  width: 3rem;
+  height: 3rem;
+  padding: .625rem;
+  border-radius: 50%;
+  color: var(--color-surface);
+  background: var(--color-success);
+}
+
+html body .dashboard-yoru main.component-showcase.forms-showcase .forms-wizard-complete h2,
+html body .dashboard-yoru main.component-showcase.forms-showcase .forms-wizard-complete p {
+  margin: 0;
+}
+
+html body .dashboard-yoru main.component-showcase.forms-showcase .forms-wizard-complete h2 {
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+html body .dashboard-yoru main.component-showcase.forms-showcase .forms-wizard-complete p {
+  max-width: 36rem;
+  color: var(--color-muted);
+  font-size: .875rem;
+  line-height: 1.5;
+}
+
+@media (max-width: 640px) {
+  html body .dashboard-yoru main.component-showcase.forms-showcase .forms-validation-grid {
+    grid-template-columns: 1fr;
+  }
+
+  html body .dashboard-yoru main.component-showcase.forms-showcase .forms-wizard-steps {
+    gap: .375rem;
+  }
+
+  html body .dashboard-yoru main.component-showcase.forms-showcase .forms-wizard-steps li {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    gap: .25rem;
+    text-align: center;
+  }
+
+  html body .dashboard-yoru main.component-showcase.forms-showcase .forms-wizard-step-number {
+    width: 2.25rem;
+    height: 2.25rem;
+  }
+}
+
+/* Editor controls use a quiet reading surface; accent is reserved for actions. */
+html body .dashboard-yoru main.component-showcase.forms-showcase .forms-editor {
+  overflow: hidden;
+  border-color: var(--color-border);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-card);
+}
+
+html body .dashboard-yoru main.component-showcase.forms-showcase .forms-editor-toolbar {
+  display: flex;
+  align-items: center;
+  gap: .375rem;
+  padding: .625rem;
+  border-bottom: 1px solid var(--color-border);
+  background: var(--color-surface-raised);
+}
+
+html body .dashboard-yoru main.component-showcase.forms-showcase .forms-editor-toolbar .button-yoru {
+  min-width: 44px;
+  min-height: 44px;
+  border: 1px solid var(--color-border);
+  border-radius: .5rem;
+  color: var(--color-foreground);
+  background: var(--color-surface);
+}
+
+html body .dashboard-yoru main.component-showcase.forms-showcase .forms-editor-toolbar .button-yoru:hover:not(:disabled),
+html body .dashboard-yoru main.component-showcase.forms-showcase .forms-editor-toolbar .button-yoru:focus-visible {
+  border-color: var(--color-primary-border);
+  color: var(--color-primary);
+  background: var(--color-primary-subtle);
+}
+
+html body .dashboard-yoru main.component-showcase.forms-showcase .forms-editor textarea {
+  min-height: 220px;
+  padding: 1rem;
+  color: var(--color-foreground);
+  background: var(--color-surface);
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+html body .dashboard-yoru main.component-showcase.forms-showcase .forms-inline-editor {
+  min-height: 124px;
+  padding: 1rem;
+  border-color: var(--color-primary-border);
+  color: var(--color-foreground);
+  background: color-mix(in srgb, var(--color-primary-subtle) 8%, var(--color-surface));
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+/* React DatePicker keeps full dates and month/year values visually consistent. */
+html body .dashboard-yoru .forms-date-picker {
+  display: block;
+  width: 100%;
+}
+
+html body .dashboard-yoru .forms-date-picker-input {
+  width: 100%;
+}
+
+html body .dashboard-yoru .forms-date-picker-popper {
+  z-index: 90 !important;
+}
+
+html body .dashboard-yoru .react-datepicker {
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  border-radius: .75rem;
+  color: var(--color-foreground);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-card);
+  font-family: inherit;
+}
+
+html body .dashboard-yoru .react-datepicker__header {
+  border-bottom-color: var(--color-border);
+  background: var(--color-primary-subtle);
+}
+
+html body .dashboard-yoru .react-datepicker__current-month,
+html body .dashboard-yoru .react-datepicker__month-text,
+html body .dashboard-yoru .react-datepicker__year-text {
+  color: var(--color-foreground);
+}
+
+html body .dashboard-yoru .react-datepicker__month-text,
+html body .dashboard-yoru .react-datepicker__year-text {
+  min-width: 44px;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: .5rem;
+}
+
+html body .dashboard-yoru .react-datepicker__month-text:hover,
+html body .dashboard-yoru .react-datepicker__year-text:hover {
+  color: var(--color-primary);
+  background: var(--color-primary-subtle);
+}
+
+html body .dashboard-yoru .react-datepicker__month-text--selected,
+html body .dashboard-yoru .react-datepicker__year-text--selected {
+  color: var(--color-primary-foreground) !important;
+  background: var(--color-primary) !important;
+}
+
+html body .dashboard-yoru .react-datepicker__time-container {
+  width: 8rem;
+  border-left-color: var(--color-border);
+}
+
+html body .dashboard-yoru .react-datepicker__time,
+html body .dashboard-yoru .react-datepicker__time-box {
+  width: 100%;
+  background: var(--color-surface);
+}
+
+html body .dashboard-yoru .react-datepicker__time-list-item {
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-foreground);
+  background: transparent;
+  font-size: .875rem;
+}
+
+html body .dashboard-yoru .react-datepicker__time-list-item:hover {
+  color: var(--color-primary);
+  background: var(--color-primary-subtle) !important;
+}
+
+html body .dashboard-yoru .react-datepicker__time-list-item--selected {
+  color: var(--color-primary-foreground) !important;
+  background: var(--color-primary) !important;
+  font-weight: 600;
+}
+
+/* Wizard variants and the requested progress-tab treatment. */
+html body .dashboard-yoru main.component-showcase.forms-showcase .forms-wizard-card-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: .75rem;
+  padding: 1rem clamp(1rem, 3vw, 1.5rem) .875rem;
+  border-bottom: 1px solid var(--color-border);
+}
+
+html body .dashboard-yoru main.component-showcase.forms-showcase .forms-wizard-card-heading h2 {
+  margin: 0;
+  color: var(--color-foreground);
+  font-size: 1.15rem;
+  font-weight: 600;
+}
+
+html body .dashboard-yoru main.component-showcase.forms-showcase .forms-wizard-card-heading > span {
+  flex: none;
+  padding: .375rem .625rem;
+  border: 1px solid var(--color-primary-border);
+  border-radius: 999px;
+  color: var(--color-primary);
+  background: var(--color-primary-subtle);
+  font-size: .75rem;
+  font-weight: 600;
+}
+
+html body .dashboard-yoru main.component-showcase.forms-showcase .forms-wizard-progress-tabs {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: .5rem;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+html body .dashboard-yoru main.component-showcase.forms-showcase .forms-wizard-progress-tabs li {
+  min-width: 0;
+}
+
+html body .dashboard-yoru main.component-showcase.forms-showcase .forms-wizard-progress-tab {
+  width: 100%;
+  min-height: 44px;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  gap: .5rem;
+  padding: .375rem .5rem;
+  border: 1px solid transparent;
+  border-radius: .625rem;
+  color: var(--color-muted);
+  background: transparent;
+  cursor: pointer;
+  font: inherit;
+  font-size: .8125rem;
+  font-weight: 600;
+  text-align: left;
+}
+
+html body .dashboard-yoru main.component-showcase.forms-showcase .forms-wizard-progress-tab:hover:not(:disabled),
+html body .dashboard-yoru main.component-showcase.forms-showcase .forms-wizard-progress-tab:focus-visible {
+  border-color: var(--color-primary-border);
+  color: var(--color-primary);
+  background: var(--color-primary-subtle);
+}
+
+html body .dashboard-yoru main.component-showcase.forms-showcase .forms-wizard-progress-tab:disabled {
+  cursor: not-allowed;
+  opacity: .58;
+}
+
+html body .dashboard-yoru main.component-showcase.forms-showcase .forms-wizard-progress-tabs li.is-current .forms-wizard-progress-tab,
+html body .dashboard-yoru main.component-showcase.forms-showcase .forms-wizard-progress-tabs li.is-complete .forms-wizard-progress-tab {
+  color: var(--color-primary);
+  background: color-mix(in srgb, var(--color-primary-subtle) 62%, transparent);
+}
+
+html body .dashboard-yoru main.component-showcase.forms-showcase .forms-wizard-consent {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: .125rem .25rem;
+}
+
+html body .dashboard-yoru main.component-showcase.forms-showcase .forms-wizard-terms-trigger {
+  min-height: 44px;
+  padding: 0 .125rem;
+  border: 0;
+  color: var(--color-primary);
+  background: transparent;
+  cursor: pointer;
+  font: inherit;
+  font-size: .875rem;
+  text-decoration: underline;
+  text-underline-offset: .18em;
+}
+
+html body .dashboard-yoru main.component-showcase.forms-showcase .forms-wizard-terms-trigger:hover,
+html body .dashboard-yoru main.component-showcase.forms-showcase .forms-wizard-terms-trigger:focus-visible {
+  color: var(--color-primary-hover);
+}
+
+html body .dashboard-yoru .forms-wizard-review {
+  display: grid;
+  justify-items: center;
+  gap: .75rem;
+  min-height: 180px;
+  align-content: center;
+  color: var(--color-foreground);
+  text-align: center;
+}
+
+html body .dashboard-yoru .forms-wizard-review > svg {
+  width: 2.5rem;
+  height: 2.5rem;
+  padding: .5rem;
+  border-radius: 50%;
+  color: var(--color-surface);
+  background: var(--color-success);
+}
+
+html body .dashboard-yoru .forms-wizard-review h3,
+html body .dashboard-yoru .forms-wizard-review p {
+  margin: 0;
+}
+
+html body .dashboard-yoru .forms-wizard-review p {
+  max-width: 36rem;
+  color: var(--color-muted);
+  font-size: .875rem;
+  line-height: 1.5;
+}
+
+html body .dashboard-yoru .forms-wizard-vertical-layout {
+  display: grid;
+  grid-template-columns: minmax(180px, .36fr) minmax(0, 1fr);
+}
+
+html body .dashboard-yoru .forms-wizard-vertical-nav {
+  padding: 1rem;
+  border-right: 1px solid var(--color-border);
+  background: color-mix(in srgb, var(--color-primary-subtle) 22%, var(--color-surface));
+}
+
+html body .dashboard-yoru .forms-wizard-vertical-nav ol {
+  display: grid;
+  gap: .5rem;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+html body .dashboard-yoru .forms-wizard-vertical-nav button {
+  width: 100%;
+  min-height: 56px;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  gap: .625rem;
+  padding: .5rem .625rem;
+  border: 1px solid transparent;
+  border-radius: .625rem;
+  color: var(--color-muted);
+  background: transparent;
+  cursor: pointer;
+  font: inherit;
+  text-align: left;
+}
+
+html body .dashboard-yoru .forms-wizard-vertical-nav button:hover:not(:disabled),
+html body .dashboard-yoru .forms-wizard-vertical-nav button:focus-visible {
+  border-color: var(--color-primary-border);
+  color: var(--color-primary);
+  background: var(--color-primary-subtle);
+}
+
+html body .dashboard-yoru .forms-wizard-vertical-nav li.is-current button {
+  color: var(--color-primary);
+  background: var(--color-primary-subtle);
+}
+
+html body .dashboard-yoru .forms-wizard-vertical-nav li.is-complete button {
+  color: var(--color-success);
+  background: var(--color-success-surface);
+}
+
+html body .dashboard-yoru .forms-wizard-vertical-nav li.is-complete .forms-wizard-step-number {
+  border-color: var(--color-success);
+  color: var(--color-surface);
+  background: var(--color-success);
+}
+
+html body .dashboard-yoru .forms-wizard-vertical-nav button:disabled {
+  cursor: not-allowed;
+  opacity: .58;
+}
+
+html body .dashboard-yoru .forms-wizard-vertical-nav small {
+  display: block;
+  margin-top: .125rem;
+  color: var(--color-muted);
+  font-size: .75rem;
+  font-weight: 400;
+}
+
+html body .dashboard-yoru .forms-wizard-vertical-form {
+  min-width: 0;
+}
+
+html body .dashboard-yoru .forms-wizard-vertical-form .forms-wizard-footer {
+  border-radius: 0 0 var(--radius-card) 0;
+}
+
+@media (max-width: 640px) {
+  html body .dashboard-yoru main.component-showcase.forms-showcase .forms-wizard-progress-tabs {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  html body .dashboard-yoru .forms-wizard-vertical-layout {
+    grid-template-columns: 1fr;
+  }
+
+  html body .dashboard-yoru .forms-wizard-vertical-nav {
+    border-right: 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  html body .dashboard-yoru .forms-wizard-vertical-form .forms-wizard-footer {
+    border-radius: 0 0 var(--radius-card) var(--radius-card);
+  }
+}
+
+/* Tiptap editor surfaces keep the existing form tokens while making every
+   toolbar action real and every editable region keyboard-friendly. */
+html body .dashboard-yoru main.component-showcase.forms-showcase .forms-editor .ProseMirror {
+  min-height: 220px;
+  padding: 1rem;
+  color: var(--color-foreground);
+  background: var(--color-surface);
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.6;
+  outline: 0;
+}
+
+html body .dashboard-yoru main.component-showcase.forms-showcase .forms-editor .ProseMirror:focus-visible,
+html body .dashboard-yoru main.component-showcase.forms-showcase .forms-inline-editor .ProseMirror:focus-visible {
+  box-shadow: inset 0 0 0 3px color-mix(in srgb, var(--color-focus) 34%, transparent);
+}
+
+html body .dashboard-yoru main.component-showcase.forms-showcase .forms-editor .ProseMirror p,
+html body .dashboard-yoru main.component-showcase.forms-showcase .forms-inline-editor .ProseMirror p {
+  margin: 0 0 .75rem;
+}
+
+html body .dashboard-yoru main.component-showcase.forms-showcase .forms-editor .ProseMirror > :last-child,
+html body .dashboard-yoru main.component-showcase.forms-showcase .forms-inline-editor .ProseMirror > :last-child {
+  margin-bottom: 0;
+}
+
+html body .dashboard-yoru main.component-showcase.forms-showcase .forms-editor .ProseMirror :is(ul, ol) {
+  padding-left: 1.5rem;
+}
+
+html body .dashboard-yoru main.component-showcase.forms-showcase .forms-editor .ProseMirror a,
+html body .dashboard-yoru main.component-showcase.forms-showcase .forms-inline-editor .ProseMirror a {
+  color: var(--color-primary);
+  text-decoration: underline;
+  text-underline-offset: .18em;
+}
+
+html body .dashboard-yoru main.component-showcase.forms-showcase .forms-editor-link-form {
+  display: grid;
+  gap: .75rem;
+  min-width: min(18rem, 72vw);
+}
+
+html body .dashboard-yoru main.component-showcase.forms-showcase .forms-editor-link-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: .5rem;
+}
+
+html body .forms-editor-link-popover {
+  box-sizing: border-box;
+  width: min(20rem, calc(100vw - 2rem));
+  padding: 1rem;
+  border-color: var(--color-border);
+  color: var(--color-foreground);
+  background: var(--color-surface-raised);
+  box-shadow: var(--shadow-card);
+  backdrop-filter: none;
+}
+
+html body .forms-editor-link-popover .popover-yoru-header h3 {
+  color: var(--color-foreground);
+  font-size: .875rem;
+}
+
+html body .forms-editor-link-popover .popover-yoru-body {
+  margin-top: .75rem;
+}
+
+html body .forms-editor-link-popover .forms-field {
+  display: grid;
+  gap: .375rem;
+  color: var(--color-foreground);
+  font-size: .875rem;
+  font-weight: 500;
+}
+
+html body .forms-editor-link-popover .forms-editor-link-form .forms-input {
+  width: 100%;
+  min-height: 44px;
+  padding: 0 .75rem;
+  box-sizing: border-box;
+  border: 1px solid var(--color-border);
+  border-radius: .75rem;
+  color: var(--color-foreground);
+  background: var(--color-surface);
+  font: inherit;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+html body .forms-editor-link-popover .forms-editor-link-form .forms-input:focus-visible {
+  outline: 3px solid var(--color-focus);
+  outline-offset: 2px;
+  border-color: var(--color-primary);
+}
+
+html body .forms-editor-link-popover .popover-yoru-arrow {
+  fill: var(--color-surface-raised);
+  stroke: var(--color-border);
+}
+
+html body .dashboard-yoru main.component-showcase.forms-showcase .forms-inline-editor {
+  min-height: 124px;
+  padding: 0;
+  border-color: var(--color-primary-border);
+  color: var(--color-foreground);
+  background: color-mix(in srgb, var(--color-primary-subtle) 8%, var(--color-surface));
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+html body .dashboard-yoru main.component-showcase.forms-showcase .forms-inline-editor .ProseMirror {
+  min-height: 124px;
+  padding: 1rem;
+  color: var(--color-foreground);
+  outline: 0;
+}
+
+/* Progress bars mirror the reference pattern: an accent-complete rail,
+   current outlined node, and quiet upcoming steps. */
+html body .dashboard-yoru main.component-showcase.forms-showcase .forms-wizard-progress-bar {
+  display: flex;
+  align-items: flex-start;
+  min-width: 36rem;
+  padding: .25rem 0 0;
+  margin: 0;
+  list-style: none;
+}
+
+html body .dashboard-yoru main.component-showcase.forms-showcase .forms-wizard-progress-bar > li {
+  min-width: 0;
+  display: grid;
+  grid-template-columns: auto minmax(1.25rem, 1fr);
+  align-items: start;
+  flex: 1 1 0;
+}
+
+html body .dashboard-yoru main.component-showcase.forms-showcase .forms-wizard-progress-bar > li:last-child {
+  flex: 0 0 auto;
+  grid-template-columns: auto;
+}
+
+html body .dashboard-yoru main.component-showcase.forms-showcase .forms-wizard-progress-bar-step {
+  min-width: 3.5rem;
+  display: grid;
+  justify-items: center;
+  gap: .375rem;
+  padding: 0;
+  border: 0;
+  color: var(--color-muted);
+  background: transparent;
+  cursor: pointer;
+  font: inherit;
+  font-size: .75rem;
+  font-weight: 500;
+  line-height: 1.25;
+  text-align: center;
+}
+
+html body .dashboard-yoru main.component-showcase.forms-showcase .forms-wizard-progress-bar-step:disabled {
+  cursor: not-allowed;
+  opacity: .72;
+}
+
+html body .dashboard-yoru main.component-showcase.forms-showcase .forms-wizard-progress-bar-step:focus-visible {
+  outline: 3px solid var(--color-focus);
+  outline-offset: 3px;
+  border-radius: .5rem;
+}
+
+html body .dashboard-yoru main.component-showcase.forms-showcase .forms-wizard-progress-bar-node {
+  width: 2.5rem;
+  height: 2.5rem;
+  display: grid;
+  place-items: center;
+  border: 2px solid var(--color-border);
+  border-radius: 50%;
+  color: var(--color-muted);
+  background: var(--color-surface);
+  font-size: .875rem;
+  font-weight: 600;
+}
+
+html body .dashboard-yoru main.component-showcase.forms-showcase .forms-wizard-progress-bar-node svg {
+  width: 1.125rem;
+  height: 1.125rem;
+}
+
+html body .dashboard-yoru main.component-showcase.forms-showcase .forms-wizard-progress-bar-line {
+  height: 2px;
+  margin: 1.25rem .5rem 0;
+  background: var(--color-border);
+}
+
+html body .dashboard-yoru main.component-showcase.forms-showcase .forms-wizard-progress-bar > li.is-complete .forms-wizard-progress-bar-step {
+  color: var(--color-success);
+}
+
+html body .dashboard-yoru main.component-showcase.forms-showcase .forms-wizard-progress-bar > li.is-current .forms-wizard-progress-bar-step {
+  color: var(--color-primary);
+}
+
+html body .dashboard-yoru main.component-showcase.forms-showcase .forms-wizard-progress-bar > li.is-complete .forms-wizard-progress-bar-node {
+  border-color: var(--color-success);
+  color: var(--color-surface);
+  background: var(--color-success);
+}
+
+html body .dashboard-yoru main.component-showcase.forms-showcase .forms-wizard-progress-bar > li.is-current .forms-wizard-progress-bar-node {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+  background: var(--color-surface);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-primary-subtle) 72%, transparent);
+}
+
+html body .dashboard-yoru main.component-showcase.forms-showcase .forms-wizard-progress-bar-line.is-complete {
+  background: var(--color-success);
+}
+
+html body .dashboard-yoru main.component-showcase.forms-showcase .forms-wizard-vertical-progress {
+  overflow-x: auto;
+  padding: 1rem clamp(1rem, 3vw, 1.5rem) .875rem;
+  border-bottom: 1px solid var(--color-border);
+  background: color-mix(in srgb, var(--color-primary-subtle) 18%, var(--color-surface));
+}
+
+@media (max-width: 640px) {
+  html body .dashboard-yoru main.component-showcase.forms-showcase .forms-wizard-header {
+    overflow-x: auto;
+  }
+
+  html body .dashboard-yoru main.component-showcase.forms-showcase .forms-wizard-progress-bar {
+    min-width: 30rem;
+  }
+}
