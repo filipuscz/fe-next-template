@@ -1139,6 +1139,27 @@ html body .dashboard-yoru .rdp-month_caption { height: 2rem; display: flex; alig
 html body .dashboard-yoru .rdp-button_previous, html body .dashboard-yoru .rdp-button_next { width: 32px; height: 32px; border: 1px solid var(--color-border); border-radius: .5rem; color: var(--color-primary); background: var(--color-surface-raised); }
 html body .dashboard-yoru .rdp-day_button { width: 34px; height: 34px; border-radius: .5rem; color: var(--color-foreground); font-size: .8125rem; }
 html body .dashboard-yoru .rdp-selected .rdp-day_button { color: var(--color-primary-foreground); background: var(--color-primary); }
+html body .dashboard-yoru .forms-date-example { display: grid; gap: .75rem; width: fit-content; max-width: 100%; }
+html body .dashboard-yoru .forms-date-calendar { display: grid; gap: .75rem; width: fit-content; max-width: 100%; padding: .75rem; border: 1px solid var(--color-border); border-radius: .875rem; background: color-mix(in srgb, var(--color-primary-subtle) 20%, var(--color-surface-raised)); }
+html body .dashboard-yoru .forms-date-input-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .75rem; }
+html body .dashboard-yoru .forms-date-calendar .rdp-day_button { width: 44px; height: 44px; }
+html body .dashboard-yoru .forms-date-calendar .rdp-day_button:focus-visible { outline: 3px solid var(--color-focus); outline-offset: 2px; }
+html body .dashboard-yoru .forms-time-picker-field { display: grid; gap: .375rem; }
+html body .dashboard-yoru .forms-time-picker-control { position: relative; width: 100%; }
+html body .dashboard-yoru .forms-time-picker-field .forms-date-picker-input { padding-right: 3.25rem; }
+html body .dashboard-yoru .forms-time-picker-field .forms-time-picker-clear { position: absolute; top: 50%; right: .25rem; width: 44px; height: 44px; display: grid; place-items: center; padding: 0; border: 0; border-radius: .5rem; color: var(--color-muted); background: transparent; cursor: pointer; transform: translateY(-50%); }
+html body .dashboard-yoru .forms-time-picker-field .forms-time-picker-clear:hover { color: var(--color-primary); background: var(--color-primary-subtle); }
+html body .dashboard-yoru .forms-time-picker-field .forms-time-picker-clear:focus-visible { outline: 3px solid var(--color-focus); outline-offset: 1px; }
+html body .dashboard-yoru .forms-time-picker-field .forms-time-picker-clear svg { width: 1rem; height: 1rem; stroke-width: 2.25; }
+html body .dashboard-yoru .forms-time-only-popper .react-datepicker--time-only { width: 8rem; }
+@media (max-width: 430px) { html body .dashboard-yoru .forms-date-calendar { width: 100%; padding: .5rem; overflow-x: auto; } html body .dashboard-yoru .forms-date-calendar .rdp-day_button { width: 38px; height: 44px; } }
+@media (max-width: 430px) { html body .dashboard-yoru .forms-date-input-grid { grid-template-columns: 1fr; } }
+html body .dashboard-yoru .forms-drag-date-picker { display: grid; gap: .75rem; width: fit-content; max-width: 100%; padding: .875rem; border: 1px solid var(--color-border); border-radius: .875rem; background: color-mix(in srgb, var(--color-primary-subtle) 20%, var(--color-surface-raised)); user-select: none; }
+html body .dashboard-yoru .forms-drag-date-picker .forms-hint { max-width: 42ch; margin: 0; }
+html body .dashboard-yoru .forms-drag-date-picker .rdp-day_button { width: 44px; height: 44px; touch-action: none; }
+html body .dashboard-yoru .forms-drag-date-picker .rdp-day_button:focus-visible { outline: 3px solid var(--color-focus); outline-offset: 2px; }
+html body .dashboard-yoru .forms-drag-date-output { min-height: 24px; color: var(--color-primary); font-size: .875rem; font-weight: 600; line-height: 1.5; }
+@media (max-width: 430px) { html body .dashboard-yoru .forms-drag-date-picker { width: 100%; padding: .5rem; overflow-x: auto; } html body .dashboard-yoru .forms-drag-date-picker .rdp-day_button { width: 38px; height: 44px; } }
 html body .dashboard-yoru .forms-hub-dropzone { display: grid; place-items: center; gap: .5rem; min-height: 148px; padding: 1rem; border: 1px dashed var(--color-primary-border); border-radius: 1rem; color: var(--color-muted); background: color-mix(in srgb, var(--color-primary-subtle) 42%, var(--color-surface)); cursor: pointer; text-align: center; transition: border-color var(--transition-fast), background var(--transition-fast); }
 html body .dashboard-yoru .forms-hub-dropzone.is-drag-active { border-color: var(--color-primary); background: var(--color-primary-subtle); }
 html body .dashboard-yoru .forms-hub-dropzone svg { width: 1.5rem; height: 1.5rem; color: var(--color-primary); }
