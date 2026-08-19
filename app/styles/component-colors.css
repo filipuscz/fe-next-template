@@ -1154,6 +1154,23 @@ html body .dashboard-yoru .forms-time-picker-field .forms-time-picker-clear svg 
 html body .dashboard-yoru .forms-time-only-popper .react-datepicker--time-only { width: 8rem; }
 @media (max-width: 430px) { html body .dashboard-yoru .forms-date-calendar { width: 100%; padding: .5rem; overflow-x: auto; } html body .dashboard-yoru .forms-date-calendar .rdp-day_button { width: 38px; height: 44px; } }
 @media (max-width: 430px) { html body .dashboard-yoru .forms-date-input-grid { grid-template-columns: 1fr; } }
+/* Date input popover — click-to-open calendar panel (mirrors <input type="date"> UX) */
+html body .dashboard-yoru .forms-date-popover-root { position: relative; width: fit-content; max-width: 100%; }
+html body .dashboard-yoru .forms-date-popover-trigger { position: relative; display: grid; gap: .5rem; cursor: pointer; }
+html body .dashboard-yoru .forms-date-popover-trigger .forms-field { pointer-events: none; }
+html body .dashboard-yoru .forms-date-popover-trigger .forms-date-input-grid .forms-field { pointer-events: none; }
+html body .dashboard-yoru .forms-date-popover-icon { position: absolute; right: .75rem; bottom: .75rem; width: 1rem; height: 1rem; color: var(--color-muted); pointer-events: none; transition: color var(--transition-fast); }
+html body .dashboard-yoru .forms-date-popover-trigger.is-open .forms-date-popover-icon,
+html body .dashboard-yoru .forms-date-popover-trigger:hover .forms-date-popover-icon { color: var(--color-primary); }
+html body .dashboard-yoru .forms-date-popover-trigger .forms-input { padding-right: 2.5rem; cursor: pointer; }
+html body .dashboard-yoru .forms-date-popover-trigger.is-open .forms-input { border-color: var(--color-primary); box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-focus) 34%, transparent), inset 0 1px 2px color-mix(in srgb, var(--color-foreground) 5%, transparent); }
+html body .dashboard-yoru .forms-date-popover-panel { position: absolute; z-index: 50; top: calc(100% + .5rem); left: 0; display: grid; gap: .75rem; width: fit-content; max-width: min(360px, calc(100vw - 2rem)); padding: .875rem; border: 1px solid var(--color-border); border-radius: .875rem; background: color-mix(in srgb, var(--color-primary-subtle) 20%, var(--color-surface-raised)); box-shadow: 0 16px 40px color-mix(in srgb, var(--color-foreground) 18%, transparent); animation: forms-date-popover-enter 140ms ease-out; }
+@keyframes forms-date-popover-enter { from { opacity: 0; transform: translateY(6px) scale(.98); } to { opacity: 1; transform: translateY(0) scale(1); } }
+html body .dashboard-yoru .forms-date-popover-panel .rdp-day_button { width: 44px; height: 44px; }
+html body .dashboard-yoru .forms-date-popover-panel .rdp-day_button:focus-visible { outline: 3px solid var(--color-focus); outline-offset: 2px; }
+@media (max-width: 430px) { html body .dashboard-yoru .forms-date-popover-panel { width: calc(100vw - 2rem); overflow-x: auto; } html body .dashboard-yoru .forms-date-popover-panel .rdp-day_button { width: 38px; height: 44px; } }
+@media (prefers-reduced-motion: reduce) { html body .dashboard-yoru .forms-date-popover-panel { animation: none; } }
+
 html body .dashboard-yoru .forms-drag-date-picker { display: grid; gap: .75rem; width: fit-content; max-width: 100%; padding: .875rem; border: 1px solid var(--color-border); border-radius: .875rem; background: color-mix(in srgb, var(--color-primary-subtle) 20%, var(--color-surface-raised)); user-select: none; }
 html body .dashboard-yoru .forms-drag-date-picker .forms-hint { max-width: 42ch; margin: 0; }
 html body .dashboard-yoru .forms-drag-date-picker .rdp-day_button { width: 44px; height: 44px; touch-action: none; }

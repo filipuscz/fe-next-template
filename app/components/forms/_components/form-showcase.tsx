@@ -1,13 +1,13 @@
 "use client";
 
-import { Check, ChevronDown, CircleAlert, FileText, Search, Star, Upload, X } from "lucide-react";
+import { CalendarDays, Check, ChevronDown, CircleAlert, FileText, Search, Star, Upload, X } from "lucide-react";
 import { Command } from "cmdk";
 import { enUS } from "date-fns/locale";
 import { DayPicker, type DateRange, type DayButtonProps } from "react-day-picker";
 import ReactDatePicker from "react-datepicker";
 import { EditorContent, useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Button } from "@/app/components/ui/button";
 import { Popover } from "@/app/components/ui/popover";
 
@@ -63,12 +63,62 @@ function TimePickerField({ id, label, value, onChange }: { id: string; label: st
   return <div className="forms-time-picker-field"><label className="forms-field" htmlFor={id}><span>{label}</span></label><div className="forms-time-picker-control"><ReactDatePicker id={id} selected={parseTimeValue(value)} onChange={handleChange} showTimeSelect showTimeSelectOnly timeIntervals={1} timeCaption="Time" timeFormat="HH:mm" dateFormat="HH:mm" placeholderText="Choose a time" className="forms-input forms-date-picker-input" wrapperClassName="forms-date-picker" popperClassName="forms-date-picker-popper forms-time-only-popper" aria-label={label} aria-describedby={`${id}-hint`} autoComplete="off" isClearable={false} />{value ? <button className="forms-time-picker-clear" type="button" onClick={() => onChange("")} aria-label="Clear reminder time"><X aria-hidden="true" /></button> : null}</div><small id={`${id}-hint`}>Choose a minute or type an exact time in the field.</small></div>;
 }
 
-function CalendarProps({ input, children }: { input: React.ReactNode; children: React.ReactNode }) { return <div className="forms-date-example">{input}<div className="forms-date-calendar">{children}</div></div>; }
+function DateInputPopover({ input, children, id }: { input: React.ReactNode; children: React.ReactNode; id: string }) {
+  const [open, setOpen] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!open) return;
+    const handlePointerDown = (event: PointerEvent) => {
+      if (containerRef.current && !containerRef.current.contains(event.target as Node)) {
+        setOpen(false);
+      }
+    };
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setOpen(false);
+    };
+    document.addEventListener("pointerdown", handlePointerDown);
+    document.addEventListener("keydown", handleKeyDown);
+    return () => {
+      document.removeEventListener("pointerdown", handlePointerDown);
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [open]);
+
+  return (
+    <div className="forms-date-popover-root" ref={containerRef}>
+      <div
+        className={`forms-date-popover-trigger${open ? " is-open" : ""}`}
+        onClick={() => setOpen((v) => !v)}
+        role="button"
+        tabIndex={0}
+        aria-expanded={open}
+        aria-haspopup="dialog"
+        aria-controls={`${id}-calendar`}
+        onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); setOpen((v) => !v); } }}
+      >
+        {input}
+        <CalendarDays className="forms-date-popover-icon" aria-hidden="true" />
+      </div>
+      {open ? (
+        <div
+          id={`${id}-calendar`}
+          className="forms-date-popover-panel"
+          role="dialog"
+          aria-label="Date picker calendar"
+          onPointerDown={(e) => e.stopPropagation()}
+        >
+          {children}
+        </div>
+      ) : null}
+    </div>
+  );
+}
 function DateTextInput({ id, label, date, onDateChange }: { id: string; label: string; date?: Date; onDateChange: (date: Date | undefined) => void }) { const [draftState, setDraftState] = useState<{ date?: Date; value: string }>({ date, value: formatUtcDateInput(date) }); const draft = draftState.date === date ? draftState.value : formatUtcDateInput(date); const commit = () => { const parsed = parseUtcDateInput(draft); if (parsed) onDateChange(parsed); else setDraftState({ date, value: formatUtcDateInput(date) }); }; return <label className="forms-field"><span>{label}</span><input id={id} className="forms-input" type="text" inputMode="numeric" value={draft} placeholder="YYYY-MM-DD" onChange={(event) => setDraftState({ date, value: event.target.value })} onBlur={commit} onKeyDown={(event) => { if (event.key === "Enter") { event.preventDefault(); commit(); } }} aria-label={label} /></label>; }
 function PickerMonthInput({ id, label, date, onDateChange, yearOnly = false }: { id: string; label: string; date: Date; onDateChange: (date: Date) => void; yearOnly?: boolean }) { return <label className="forms-field"><span>{label}</span><input id={id} className="forms-input" type={yearOnly ? "number" : "month"} min={yearOnly ? "2020" : "2020-01"} max={yearOnly ? "2030" : "2030-12"} value={yearOnly ? String(date.getUTCFullYear()) : formatMonthInput(date)} onChange={(event) => { if (yearOnly) { const year = Number(event.target.value); if (year >= 2020 && year <= 2030) onDateChange(new Date(Date.UTC(year, date.getUTCMonth(), 1))); } else { const parsed = parseMonthInput(event.target.value); if (parsed) onDateChange(parsed); } }} aria-label={label} /></label>; }
-function SingleDateExample() { const [date, setDate] = useState<Date | undefined>(new Date(Date.UTC(2026, 7, 8))); const [month, setMonth] = useState(dragCalendarMonth); const handleDateChange = (next?: Date) => { setDate(next); if (next) setMonth(monthStart(next)); }; return <CalendarProps input={<DateTextInput id="forms-start-date" label="Start date" date={date} onDateChange={handleDateChange} />}><p className="forms-hint">Selected: <b>{date ? dragDateYearFormatter.format(date) : "Choose a date"}</b></p><DayPicker mode="single" month={month} onMonthChange={setMonth} today={dragCalendarToday} timeZone="UTC" locale={enUS} selected={date} onSelect={handleDateChange} showOutsideDays aria-label="Start date calendar" /></CalendarProps>; }
-function DateTimeExample() { const [date, setDate] = useState<Date | undefined>(new Date(Date.UTC(2026, 7, 8))); const [month, setMonth] = useState(dragCalendarMonth); const [time, setTime] = useState("09:30"); const handleDateChange = (next?: Date) => { setDate(next); if (next) setMonth(monthStart(next)); }; return <CalendarProps input={<DateTextInput id="forms-publish-date" label="Publish date" date={date} onDateChange={handleDateChange} />}><p className="forms-hint">Selected: <b>{date ? `${dragDateYearFormatter.format(date)} at ${time}` : "Choose a date and time"}</b></p><DayPicker mode="single" month={month} onMonthChange={setMonth} today={dragCalendarToday} timeZone="UTC" locale={enUS} selected={date} onSelect={handleDateChange} showOutsideDays aria-label="Publish date calendar" /><label className="forms-field"><span>Publish time</span><input className="forms-input" type="time" step="60" value={time} onChange={(event) => setTime(event.target.value)} /></label></CalendarProps>; }
-function DateRangeExample() { const [range, setRange] = useState<DateRange>({ from: new Date(Date.UTC(2026, 7, 10)), to: new Date(Date.UTC(2026, 7, 14)) }); const [month, setMonth] = useState(dragCalendarMonth); const handleRangeChange = (value: DateRange | undefined) => { setRange(value ?? { from: undefined, to: undefined }); if (value?.from) setMonth(monthStart(value.from)); }; return <CalendarProps input={<div className="forms-date-input-grid"><DateTextInput id="forms-range-start" label="From" date={range.from} onDateChange={(from) => handleRangeChange({ from, to: range.to })} /><DateTextInput id="forms-range-end" label="To" date={range.to} onDateChange={(to) => handleRangeChange({ from: range.from, to })} /></div>}><p className="forms-hint">Selected: <b>{range.from && range.to ? `${dragDateFormatter.format(range.from)} – ${dragDateYearFormatter.format(range.to)}` : "Choose a date range"}</b></p><DayPicker mode="range" month={month} onMonthChange={setMonth} today={dragCalendarToday} timeZone="UTC" locale={enUS} selected={range} onSelect={handleRangeChange} showOutsideDays aria-label="Date range calendar" /></CalendarProps>; }
+function SingleDateExample() { const [date, setDate] = useState<Date | undefined>(new Date(Date.UTC(2026, 7, 8))); const [month, setMonth] = useState(dragCalendarMonth); const handleDateChange = (next?: Date) => { setDate(next); if (next) setMonth(monthStart(next)); }; return <DateInputPopover id="forms-start-date" input={<DateTextInput id="forms-start-date" label="Start date" date={date} onDateChange={handleDateChange} />}><p className="forms-hint">Selected: <b>{date ? dragDateYearFormatter.format(date) : "Choose a date"}</b></p><DayPicker mode="single" month={month} onMonthChange={setMonth} today={dragCalendarToday} timeZone="UTC" locale={enUS} selected={date} onSelect={handleDateChange} showOutsideDays aria-label="Start date calendar" /></DateInputPopover>; }
+function DateTimeExample() { const [date, setDate] = useState<Date | undefined>(new Date(Date.UTC(2026, 7, 8))); const [month, setMonth] = useState(dragCalendarMonth); const [time, setTime] = useState("09:30"); const handleDateChange = (next?: Date) => { setDate(next); if (next) setMonth(monthStart(next)); }; return <DateInputPopover id="forms-publish-date" input={<DateTextInput id="forms-publish-date" label="Publish date" date={date} onDateChange={handleDateChange} />}><p className="forms-hint">Selected: <b>{date ? `${dragDateYearFormatter.format(date)} at ${time}` : "Choose a date and time"}</b></p><DayPicker mode="single" month={month} onMonthChange={setMonth} today={dragCalendarToday} timeZone="UTC" locale={enUS} selected={date} onSelect={handleDateChange} showOutsideDays aria-label="Publish date calendar" /><label className="forms-field"><span>Publish time</span><input className="forms-input" type="time" step="60" value={time} onChange={(event) => setTime(event.target.value)} /></label></DateInputPopover>; }
+function DateRangeExample() { const [range, setRange] = useState<DateRange>({ from: new Date(Date.UTC(2026, 7, 10)), to: new Date(Date.UTC(2026, 7, 14)) }); const [month, setMonth] = useState(dragCalendarMonth); const handleRangeChange = (value: DateRange | undefined) => { setRange(value ?? { from: undefined, to: undefined }); if (value?.from) setMonth(monthStart(value.from)); }; return <DateInputPopover id="forms-date-range" input={<div className="forms-date-input-grid"><DateTextInput id="forms-range-start" label="From" date={range.from} onDateChange={(from) => handleRangeChange({ from, to: range.to })} /><DateTextInput id="forms-range-end" label="To" date={range.to} onDateChange={(to) => handleRangeChange({ from: range.from, to })} /></div>}><p className="forms-hint">Selected: <b>{range.from && range.to ? `${dragDateFormatter.format(range.from)} – ${dragDateYearFormatter.format(range.to)}` : "Choose a date range"}</b></p><DayPicker mode="range" month={month} onMonthChange={setMonth} today={dragCalendarToday} timeZone="UTC" locale={enUS} selected={range} onSelect={handleRangeChange} showOutsideDays aria-label="Date range calendar" /></DateInputPopover>; }
 
 function DragDateRangePicker() {
   const [range, setRange] = useState<DateRange>({ from: dragCalendarToday, to: new Date(Date.UTC(2026, 7, 14)) });
@@ -87,9 +137,9 @@ function DragDateRangePicker() {
   return <div className="forms-date-example"><div className="forms-date-input-grid"><DateTextInput id="forms-drag-start" label="From" date={range.from} onDateChange={(from) => handleRangeChange({ from, to: range.to })} /><DateTextInput id="forms-drag-end" label="To" date={range.to} onDateChange={(to) => handleRangeChange({ from: range.from, to })} /></div><div className="forms-drag-date-picker" onPointerLeave={() => setIsDragging(false)}><p id="forms-drag-date-instructions" className="forms-hint">Drag across dates to select a range. You can also choose the start and end date with the keyboard.</p><DayPicker mode="range" month={month} onMonthChange={setMonth} today={dragCalendarToday} timeZone="UTC" locale={enUS} selected={range} onSelect={handleRangeChange} showOutsideDays fixedWeeks components={{ DayButton: DragDayButton }} aria-describedby="forms-drag-date-instructions" /><output className="forms-drag-date-output" aria-live="polite">{isDragging ? "Selecting: " : "Selected: "}{formatRange(range)}</output></div></div>;
 }
 
-function MonthPickerExample() { const [month, setMonth] = useState(dragCalendarMonth); const selectMonth = (date: Date) => setMonth(monthStart(date)); return <CalendarProps input={<PickerMonthInput id="forms-month-picker" label="Month" date={month} onDateChange={selectMonth} />}><p className="forms-hint">Selected month: <b>{dragDateYearFormatter.format(month)}</b></p><DayPicker mode="single" month={month} onMonthChange={selectMonth} selected={month} onSelect={(date) => date && selectMonth(date)} startMonth={pickerStartMonth} endMonth={pickerEndMonth} captionLayout="dropdown-months" timeZone="UTC" locale={enUS} showOutsideDays aria-label="Month picker calendar" /></CalendarProps>; }
-function YearPickerExample() { const [year, setYear] = useState(dragCalendarMonth); const selectYear = (date: Date) => setYear(new Date(Date.UTC(date.getUTCFullYear(), year.getUTCMonth(), 1))); return <CalendarProps input={<PickerMonthInput id="forms-year-picker" label="Year" date={year} onDateChange={selectYear} yearOnly />}><p className="forms-hint">Selected year: <b>{year.getUTCFullYear()}</b></p><DayPicker mode="single" month={year} onMonthChange={selectYear} selected={year} onSelect={(date) => date && selectYear(date)} startMonth={pickerStartMonth} endMonth={pickerEndMonth} captionLayout="dropdown-years" timeZone="UTC" locale={enUS} showOutsideDays aria-label="Year picker calendar" /></CalendarProps>; }
-function MonthYearPickerExample() { const [monthYear, setMonthYear] = useState(dragCalendarMonth); const selectMonthYear = (date: Date) => setMonthYear(monthStart(date)); return <CalendarProps input={<PickerMonthInput id="forms-month-year-picker" label="Month and year" date={monthYear} onDateChange={selectMonthYear} />}><p className="forms-hint">Selected: <b>{dragDateYearFormatter.format(monthYear)}</b></p><DayPicker mode="single" month={monthYear} onMonthChange={selectMonthYear} selected={monthYear} onSelect={(date) => date && selectMonthYear(date)} startMonth={pickerStartMonth} endMonth={pickerEndMonth} captionLayout="dropdown" timeZone="UTC" locale={enUS} showOutsideDays aria-label="Month and year picker calendar" /></CalendarProps>; }
+function MonthPickerExample() { const [month, setMonth] = useState(dragCalendarMonth); const selectMonth = (date: Date) => setMonth(monthStart(date)); return <DateInputPopover id="forms-month-picker" input={<PickerMonthInput id="forms-month-picker" label="Month" date={month} onDateChange={selectMonth} />}><p className="forms-hint">Selected month: <b>{dragDateYearFormatter.format(month)}</b></p><DayPicker mode="single" month={month} onMonthChange={selectMonth} selected={month} onSelect={(date) => date && selectMonth(date)} startMonth={pickerStartMonth} endMonth={pickerEndMonth} captionLayout="dropdown-months" timeZone="UTC" locale={enUS} showOutsideDays aria-label="Month picker calendar" /></DateInputPopover>; }
+function YearPickerExample() { const [year, setYear] = useState(dragCalendarMonth); const selectYear = (date: Date) => setYear(new Date(Date.UTC(date.getUTCFullYear(), year.getUTCMonth(), 1))); return <DateInputPopover id="forms-year-picker" input={<PickerMonthInput id="forms-year-picker" label="Year" date={year} onDateChange={selectYear} yearOnly />}><p className="forms-hint">Selected year: <b>{year.getUTCFullYear()}</b></p><DayPicker mode="single" month={year} onMonthChange={selectYear} selected={year} onSelect={(date) => date && selectYear(date)} startMonth={pickerStartMonth} endMonth={pickerEndMonth} captionLayout="dropdown-years" timeZone="UTC" locale={enUS} showOutsideDays aria-label="Year picker calendar" /></DateInputPopover>; }
+function MonthYearPickerExample() { const [monthYear, setMonthYear] = useState(dragCalendarMonth); const selectMonthYear = (date: Date) => setMonthYear(monthStart(date)); return <DateInputPopover id="forms-month-year-picker" input={<PickerMonthInput id="forms-month-year-picker" label="Month and year" date={monthYear} onDateChange={selectMonthYear} />}><p className="forms-hint">Selected: <b>{dragDateYearFormatter.format(monthYear)}</b></p><DayPicker mode="single" month={monthYear} onMonthChange={selectMonthYear} selected={monthYear} onSelect={(date) => date && selectMonthYear(date)} startMonth={pickerStartMonth} endMonth={pickerEndMonth} captionLayout="dropdown" timeZone="UTC" locale={enUS} showOutsideDays aria-label="Month and year picker calendar" /></DateInputPopover>; }
 
 function FormControl() { return <div className="forms-showcase-grid"><Card title="Basic Example" note="Text input"><Field label="Workspace name" hint="Use a name your team recognizes."><TextInput placeholder="YoruSpace" /></Field></Card><Card title="Text area" note="Multiline"><Field label="Message"><textarea className="forms-input" rows={4} aria-label="Message" placeholder="Write a short update for your team" /></Field></Card><Card title="Sizing" note="Large + small"><div className="forms-stack"><TextInput className="forms-input forms-input--lg" placeholder="Large control" /><TextInput className="forms-input forms-input--sm" placeholder="Small control" /></div></Card><Card title="States" note="Disabled + readonly"><div className="forms-stack"><TextInput defaultValue="Unavailable" disabled /><TextInput defaultValue="Read-only workspace ID" readOnly /><p className="forms-plain-text">Read-only plain text: <b>team-yoru-108</b></p></div></Card><Card title="Files and color" note="Native inputs"><div className="forms-stack"><Field label="Attach a brief"><TextInput type="file" /></Field><Field label="Accent color"><div className="forms-accent-color-control"><span className="forms-accent-color-preview" aria-hidden="true" /><TextInput className="forms-accent-color" type="color" defaultValue="#5638df" aria-label="Accent color token" /></div></Field></div></Card></div>; }
 function InputGroup() {
